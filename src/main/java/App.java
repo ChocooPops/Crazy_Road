@@ -1,12 +1,23 @@
 
+import view.Fenetre;
+
+
 /**
  *Classe principale.
  */
-public class App {
+public final class App {
+    
+    /**
+     * Constucteur privé par défaut.
+     */
+    private App() {
+        throw new AssertionError();
+    }
 
     /**
      * @param args the command line arguments
      */
-    private static void main(final String[] args) { 
+    public static void main(final String[] args) { 
+       new Fenetre(); 
     }
 }
