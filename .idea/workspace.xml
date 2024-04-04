@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c59de1f-4cb5-4464-9d85-417c78e0df9d" name="Changes" comment="" />
+    <list default="true" id="1c59de1f-4cb5-4464-9d85-417c78e0df9d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +19,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2eJTFTjkh36N0PrXgTFH1P2NiXR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -29,7 +32,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Develop",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/pokem/OneDrive - etu.univ-lyon1.fr/cours/BUT2/S4/qualite_dev/qualiteDevProjet",
     "node.js.detected.package.eslint": "true",
@@ -37,6 +40,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -63,7 +67,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711621578910</updated>
-      <workItem from="1711621583321" duration="503000" />
+      <workItem from="1711621583321" duration="504000" />
+      <workItem from="1711623520169" duration="189000" />
+      <workItem from="1711623827206" duration="1064000" />
+      <workItem from="1711624914960" duration="598000" />
+      <workItem from="1712212524878" duration="1716000" />
     </task>
     <servers />
   </component>
