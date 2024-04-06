@@ -19,13 +19,13 @@ public class VehiculeFactory {
     /**
      * Création d'un véhicule aléatoire.
   */
-    public Vehicule creationVehicule() {
+    public Vehicule creationVehicule(final int y) {
         Vehicule vehicule = null; 
         int nb = new Random().nextInt(10); 
-        if (nb >= 7) {
-            vehicule = new Voiture(); 
+        if (nb >= 0) {
+            vehicule = new Voiture(y); 
         } else {
-            vehicule = new Camion(); 
+            vehicule = new Camion(y); 
         }
         return vehicule; 
     }

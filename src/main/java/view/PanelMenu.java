@@ -12,12 +12,13 @@ import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.Titre;
+import model.Vehicule.Vehicule;
 
 /**
  *
  * @author ChocoPops
  */
-public class PanelMenu extends AbstractVue {
+public class PanelMenu extends AbstractVue implements Observer {
     
     private ListeTerrain listeTerrain; 
     private JButton btJouer; 
@@ -52,10 +53,15 @@ public class PanelMenu extends AbstractVue {
     */
     @Override
     public void paintComponent(final Graphics g) {
-        for (int j = 0; j < listeTerrain.getListeSize(); j++) {
-            Terrain terrain = listeTerrain.getTerrainById(j); 
+        for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
-                    terrain.getLongueur(), terrain.getHauteur(), this); 
+                    terrain.getLongueur(), terrain.getHauteur(), this);  
+            if (terrain.getType().equals("Route")) { 
+                for (Vehicule vec : terrain.getListeVehicule()) {
+                    g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(), 
+                         vec.getLongueur(), vec.getHauteur(), this);
+                }
+            }
         }
         g.drawImage(this.personnage.getImage().getImage(), 
                 this.personnage.getX(), this.personnage.getY(), 
@@ -63,6 +69,11 @@ public class PanelMenu extends AbstractVue {
         g.drawImage(this.titre.getImage().getImage(), 
                 this.titre.getX(), this.titre.getY(), 
                 this.titre.getLongueur(), this.titre.getHauteur(), this); 
+    }
+
+    @Override
+    public void update() {
+        repaint(); 
     }
     
     /**

@@ -10,7 +10,7 @@ import model.DimensionFacteur;
  */
 public class ListeTerrain {
     private List<Terrain> terrains = new ArrayList<>(); 
-    
+    private int maxY = DimensionFacteur.getHauteurFenetre();
     /**
     * Consructeur de la ListeTerrain.
     * Initialise les nombres d'objets Terrain dans la liste.
@@ -21,15 +21,22 @@ public class ListeTerrain {
     }
     
     private void setListeTerrain() {
-        int oldY = DimensionFacteur.getHauteurFenetre();
         for (int i = 0; i < 20; i++) {
-            terrains.add(new TerrainFactory().creationTerrain()); 
-            int y = oldY - terrains.get(i).getHauteur(); 
-            terrains.get(i).setY(y);
-            oldY = terrains.get(i).getY(); 
+            addTerrain(); 
         }
     }
     
+    private void addTerrain() {
+        Terrain terrain = new TerrainFactory().creationTerrain(); 
+        int y = this.maxY - terrain.getHauteur(); 
+        terrain.setY(y);
+        this.maxY = terrain.getY(); 
+        if (terrain.getType().equals("Route")) {
+            int vehiculeY = maxY + Math.round(2 * DimensionFacteur.getFacteur());
+            terrain.addVehicule(vehiculeY);
+        }
+        this.terrains.add(terrain); 
+    }
     /**
     * Obtenir la taille de la liste.
     */
@@ -42,5 +49,9 @@ public class ListeTerrain {
     */
     public Terrain getTerrainById(final int id) {
         return terrains.get(id);
+    }
+    
+    public List<Terrain> getListeTerrain() {
+        return this.terrains; 
     }
 }

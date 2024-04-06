@@ -1,7 +1,9 @@
 package model.Terrain;
 
+import java.util.List;
 import javax.swing.ImageIcon;
 import model.DimensionFacteur;
+import model.Vehicule.Vehicule;
 
 /**
  *
@@ -13,11 +15,12 @@ public abstract class Terrain {
     private ImageIcon image; 
     private int x; 
     private int y; 
+    private String type; 
     
     /**
- *
- * constructeur de la classe Terrain.
- */
+    *
+    * Constructeur de la classe Terrain.
+    */
     public Terrain() {
         this.x = 0; 
     }
@@ -38,10 +41,12 @@ public abstract class Terrain {
     public ImageIcon getImage() {
         return this.image; 
     }
-    
+    public String getType() {
+        return this.type; 
+    }
     /**
-    * Initialise l'image du terrain.
-    * Appel des methodes pour initialiser la taille.
+    * Initialise l'image du terrain.Appel des methodes pour initialiser la taille.
+     * @param image
     */
     public void setImage(final ImageIcon image) {
         this.image = image; 
@@ -49,6 +54,9 @@ public abstract class Terrain {
         setLongueur(); 
     }
     
+    public void setType(final String type) {
+        this.type = type; 
+    }
     /**
     * Initialise la hauteur selon la taille du terrain.
     */
@@ -65,5 +73,14 @@ public abstract class Terrain {
     
     public void setY(final int y) {
         this.y = y; 
+    }
+    
+    /**
+    * Methode override par les classes filles.
+    */
+    public void addVehicule(final int y) {
+    }; 
+    public List<Vehicule> getListeVehicule() {
+        return null; 
     }
 }
