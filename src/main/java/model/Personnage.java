@@ -14,7 +14,7 @@ public final class Personnage {
     private int x; 
     private int y; 
     private static Personnage personnage; 
-    
+
     private Personnage() {
 
     }
@@ -41,7 +41,15 @@ public final class Personnage {
  */
     public static Personnage getPersonnage() {
         if (Personnage.personnage == null) {
+            float facteur = DimensionFacteur.getFacteur(); 
             Personnage.personnage = new Personnage(); 
+            Personnage.personnage.image = new ImageIcon("src/main/resources/personnage/poule.png"); 
+            Personnage.personnage.x = Math.round(92 * facteur); 
+            Personnage.personnage.y = Math.round(1573 / 6 * facteur); 
+            int largeur = Personnage.personnage.image.getIconWidth(); 
+            int hauteur = Personnage.personnage.image.getIconHeight(); 
+            Personnage.personnage.longueur = Math.round(facteur * largeur); 
+            Personnage.personnage.hauteur = Math.round(facteur * hauteur); 
         }
         return Personnage.personnage; 
     }

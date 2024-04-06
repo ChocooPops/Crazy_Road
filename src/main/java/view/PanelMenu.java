@@ -1,12 +1,17 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
+import model.Titre;
 
 /**
  *
@@ -16,16 +21,30 @@ public class PanelMenu extends AbstractVue {
     
     private ListeTerrain listeTerrain; 
     private JButton btJouer; 
+    private Personnage personnage; 
+    private Titre titre; 
     
     /**
     * Constructeur de la classe PanelMenu.
     * Initialise la liset des terrains.
     */
     public PanelMenu() {
+        this.titre = new Titre(); 
         this.listeTerrain = new ListeTerrain(); 
-        btJouer = new JButton("Jouer");
+        this.personnage = Personnage.getPersonnage(); 
         this.setLayout(new BorderLayout());
-        this.add(btJouer, BorderLayout.SOUTH); 
+        setPanelBouton(); 
+    }
+    
+    private void setPanelBouton() {
+        JPanel panelFlow = new JPanel(); 
+        panelFlow.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.btJouer = new JButton("Jouer");
+        panelFlow.add(this.btJouer); 
+        panelFlow.setBackground(new Color(0x1d1d1d));
+        panelFlow.setBorder(
+                BorderFactory.createMatteBorder(5, 2, 0, 2, new Color(0x3f464f)));
+        this.add(panelFlow, BorderLayout.SOUTH); 
     }
     
     /**
@@ -38,12 +57,27 @@ public class PanelMenu extends AbstractVue {
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
                     terrain.getLongueur(), terrain.getHauteur(), this); 
         }
+        g.drawImage(this.personnage.getImage().getImage(), 
+                this.personnage.getX(), this.personnage.getY(), 
+                this.personnage.getLongueur(), this.personnage.getHauteur(), this); 
+        g.drawImage(this.titre.getImage().getImage(), 
+                this.titre.getX(), this.titre.getY(), 
+                this.titre.getLongueur(), this.titre.getHauteur(), this); 
     }
     
+    /**
+    *
+    * Sous classe du PanelMenu.
+    * Definit l'écouteur du boton jouer. 
+    */
     public class EcouteurJouer {
         
+        /**
+        *
+        * Definit l'écouteur du boton jouer. 
+        */
         public EcouteurJouer() {
-            btJouer.addMouseListener(new MouseAdapter(){
+            btJouer.addMouseListener(new MouseAdapter() {
                 
             });
         }

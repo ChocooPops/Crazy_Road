@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
  */
 public class TerrainFactory {
     
+    private static int nbTerrainCreate = 0; 
+    
     /**
     * constructeur de la classe.
     */
@@ -21,14 +23,20 @@ public class TerrainFactory {
     */
     public Terrain creationTerrain() {
         Terrain terrain = null; 
-        int nb = new Random().nextInt(10); 
-        if (nb >= 6) {
+        if (TerrainFactory.nbTerrainCreate < 3) {
             terrain = new Champ(); 
-            terrain.setImage(new ImageIcon(setImageChamp()));
+            terrain.setImage(new ImageIcon("src/main/resources/terrain/terrain1.png"));
         } else {
-            terrain = new Route(); 
-            terrain.setImage(new ImageIcon("src/main/resources/terrain/route.png"));
+            int nb = new Random().nextInt(10); 
+            if (nb >= 6) {
+                terrain = new Champ(); 
+                terrain.setImage(new ImageIcon(setImageChamp()));
+            } else {
+                terrain = new Route(); 
+                terrain.setImage(new ImageIcon("src/main/resources/terrain/route.png"));
+            }
         }
+        TerrainFactory.nbTerrainCreate++; 
         return terrain; 
     }
     
