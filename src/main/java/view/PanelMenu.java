@@ -1,6 +1,10 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import javax.swing.JButton;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 
@@ -11,6 +15,7 @@ import model.Terrain.Terrain;
 public class PanelMenu extends AbstractVue {
     
     private ListeTerrain listeTerrain; 
+    private JButton btJouer; 
     
     /**
     * Constructeur de la classe PanelMenu.
@@ -18,6 +23,9 @@ public class PanelMenu extends AbstractVue {
     */
     public PanelMenu() {
         this.listeTerrain = new ListeTerrain(); 
+        btJouer = new JButton("Jouer");
+        this.setLayout(new BorderLayout());
+        this.add(btJouer, BorderLayout.SOUTH); 
     }
     
     /**
@@ -29,6 +37,15 @@ public class PanelMenu extends AbstractVue {
             Terrain terrain = listeTerrain.getTerrainById(j); 
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
                     terrain.getLongueur(), terrain.getHauteur(), this); 
+        }
+    }
+    
+    public class EcouteurJouer {
+        
+        public EcouteurJouer() {
+            btJouer.addMouseListener(new MouseAdapter(){
+                
+            });
         }
     }
 }
