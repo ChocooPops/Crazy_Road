@@ -4,9 +4,14 @@
  */
 public class App {
 
+    private App() {
+
+    }
+
     /**
      * @param args the command line arguments
      */
-    private static void main(final String[] args) { 
+    public static void main(final String[] args) {
+        System.out.println(12);
     }
 }
