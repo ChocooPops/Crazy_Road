@@ -22,10 +22,10 @@ public class VehiculeFactory {
     public Vehicule creationVehicule(final int y) {
         Vehicule vehicule = null; 
         int nb = new Random().nextInt(10); 
-        if (nb >= 0) {
+        if (nb >= 6) {
             vehicule = new Voiture(y); 
         } else {
-            vehicule = new Camion(y); 
+            vehicule = new Camion(y - 13); 
         }
         return vehicule; 
     }

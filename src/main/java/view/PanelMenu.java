@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
@@ -24,6 +28,7 @@ public class PanelMenu extends AbstractVue implements Observer {
     private JButton btJouer; 
     private Personnage personnage; 
     private Titre titre; 
+    private Timer timer;
     
     /**
     * Constructeur de la classe PanelMenu.
@@ -35,6 +40,15 @@ public class PanelMenu extends AbstractVue implements Observer {
         this.personnage = Personnage.getPersonnage(); 
         this.setLayout(new BorderLayout());
         setPanelBouton(); 
+        
+        timer = new Timer(1000 / 60, new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                deplacerVoiture();
+                update();
+            }
+        });
+        timer.start();
     }
     
     private void setPanelBouton() {
@@ -74,6 +88,25 @@ public class PanelMenu extends AbstractVue implements Observer {
     @Override
     public void update() {
         repaint(); 
+    }
+    
+    /**
+     * Méthode pour faire avancer les voitures.
+     */
+    public void deplacerVoiture() {
+        for (Terrain terrain : listeTerrain.getListeTerrain()) {
+            if (terrain.getType().equals("Route")) { 
+                for (Vehicule vec : terrain.getListeVehicule()) {
+                    if (vec.getX() < -vec.getLongueur()) {
+                        vec.setX(DimensionFacteur.getLongueurFenetre());
+                    } else if (vec.getX() > DimensionFacteur.getLongueurFenetre() 
+                            + vec.getLongueur()) {
+                        vec.setX(-vec.getLongueur());
+                    }
+                    vec.setX(vec.getX() + vec.getVitesse() * vec.getDirection());
+                }
+            }
+        }
     }
     
     /**

@@ -16,5 +16,6 @@ public class Camion extends Vehicule {
     public Camion(final int y) {
         super(y); 
         this.setImage(new ImageIcon("src/main/resources/vehicule/camion.png")); 
+        setDirection();
     }
 }

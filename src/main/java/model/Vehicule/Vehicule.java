@@ -16,7 +16,7 @@ public abstract class Vehicule {
     
     private int hauteur; 
     private int longueur; 
-    private int vitesse; 
+    private int vitesse = 2; 
     private ImageIcon image; 
     private int x; 
     private int y; 
@@ -48,6 +48,16 @@ public abstract class Vehicule {
     public int getVitesse() {
         return this.vitesse; 
     }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setX(final int x) {
+        this.x = x;
+    }
+    
+    
     
     /**
     * Méthode qui instancie l'image du véhicule.
@@ -66,6 +76,7 @@ public abstract class Vehicule {
         int nb = new Random().nextInt(2); 
         if (nb == 0) {
             this.direction = -1; 
+            this.x = DimensionFacteur.getLongueurFenetre() - getLongueur();
         } else {
             this.direction = 1; 
             this.image = flipImageIconHorizontally(this.image); 
