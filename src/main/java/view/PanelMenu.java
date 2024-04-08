@@ -3,20 +3,20 @@ package view;
 import controller.ControllerBoutonJouer;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.Terrain.Terrain;
 import model.TimerDefilementVoiture;
 import model.Titre;
-import model.Vehicule.Vehicule;
 
 /**
  *
@@ -37,7 +37,7 @@ public class PanelMenu extends AbstractVue {
         this.setListeTerrain(new ListeTerrain());
         this.setLayout(new BorderLayout());
         this.setPanelBouton(); 
-        this.setTimerVoiture(); 
+        this.setTimerVoiture();
         new EcouteurJouer(this); 
     }
     
@@ -45,12 +45,21 @@ public class PanelMenu extends AbstractVue {
         JPanel panelFlow = new JPanel(); 
         panelFlow.setLayout(new FlowLayout(FlowLayout.CENTER));
         
-        Icon iconBoutonplay = new ImageIcon("src/main/resources/autres/boutonPlay.png");
-        this.btJouer = new JButton(iconBoutonplay);
+        float facteur = DimensionFacteur.getFacteur(); 
+
+        ImageIcon iconBoutonPlayOrigine = new ImageIcon("src/main/resources/autres/boutonPlay.png");
+        int largeur = Math.round(iconBoutonPlayOrigine.getIconWidth() * facteur / (float) 1.5);
+        int hauteur = Math.round(iconBoutonPlayOrigine.getIconHeight() * facteur / (float) 1.5);
+        Image imageRedimensionnee = iconBoutonPlayOrigine.getImage().
+                getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+        ImageIcon iconBoutonPlay = new ImageIcon(imageRedimensionnee);
+        this.btJouer = new JButton(iconBoutonPlay);
+
+        btJouer.setPreferredSize(new Dimension(largeur, hauteur));
         btJouer.setOpaque(false);
         btJouer.setContentAreaFilled(false);
         btJouer.setBorderPainted(false);
-
+        btJouer.setBorder(null);
         panelFlow.add(this.btJouer); 
         panelFlow.setBackground(new Color(0x1d1d1d));
         panelFlow.setBorder(
@@ -65,27 +74,20 @@ public class PanelMenu extends AbstractVue {
     */
     @Override
     public void paintComponent(final Graphics g) {
-        for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
-            Terrain terrain = this.getListeTerrain().
-                    getTerrainById(this.getListeTerrain().
-                            getListeSize() - i - 1); 
-            g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
-                    terrain.getLongueur(), terrain.getHauteur(), this);  
-            if (terrain.getType().equals("Route")) { 
-                for (Vehicule vec : terrain.getListeVehicule()) {
-                    g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(), 
-                         vec.getLongueur(), vec.getHauteur(), this);
-                }
-            }
-        }
-        g.drawImage(this.getPersonnage().getImage().getImage(), 
-                this.getPersonnage().getX(), this.getPersonnage().getY(), 
-                this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this); 
+        this.dessinerTerrain(g);
+        this.dessinerPersonnage(g);
+        this.dessinerVehicule(g);
+        this.dessinerTitre(g);
+    }
+    
+     /**
+    * Dessiner le titre du jeu.
+    */
+    public void dessinerTitre(final Graphics g) {
         g.drawImage(this.titre.getImage().getImage(), 
                 this.titre.getX(), this.titre.getY(), 
                 this.titre.getLongueur(), this.titre.getHauteur(), this); 
     }
-    
     /**
      * Méthode pour faire avancer les voitures.
      */
@@ -106,7 +108,7 @@ public class PanelMenu extends AbstractVue {
         *
         * Definit l'écouteur du boton jouer. 
         */
-        public EcouteurJouer(AbstractVue panel) {
+        public EcouteurJouer(final AbstractVue panel) {
             btJouer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

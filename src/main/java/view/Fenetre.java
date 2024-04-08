@@ -17,7 +17,7 @@ public final class Fenetre extends JFrame {
     * Initialise les informations importantes de l'ecran.
     */
     private Fenetre() {
-       
+       this.setFocusable(false);
     }
     
     /**
@@ -57,5 +57,7 @@ public final class Fenetre extends JFrame {
         Fenetre.fenetre.getContentPane().add(Fenetre.fenetre.panel); 
         Fenetre.fenetre.revalidate();
         Fenetre.fenetre.repaint();
+        Fenetre.fenetre.panel.setFocusable(true);
+        Fenetre.fenetre.panel.requestFocus();
     }
 }

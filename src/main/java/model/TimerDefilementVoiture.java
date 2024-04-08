@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import model.Terrain.Terrain;
 import view.AbstractVue;
 
@@ -11,8 +8,9 @@ import view.AbstractVue;
  * @author ChocoPops
  */
 public class TimerDefilementVoiture extends Observable {
-    private Timer timer; 
     private AbstractVue panel; 
+    private boolean activation; 
+    private Thread thread; 
     
     /**
      * Constructeur de la classe Timer qui observe le panel.
@@ -20,32 +18,45 @@ public class TimerDefilementVoiture extends Observable {
      * Fait deplacer les voitures du panel.
     */
     public TimerDefilementVoiture(final AbstractVue panel) {
+        this.activation = true; 
         this.addObserver(panel);
         this.panel = panel; 
-        this.setTimer();
+        this.thread = new Thread(new ThreadDefilementVoiture()); 
         this.startTimerDefilementVoiture();
     }
     
-    private void setTimer() {
-         timer = new Timer(1000 / 60, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                for (Terrain terrain : panel.getListeTerrain().getListeTerrain()) {
-                    terrain.deplacerVoiture();
-                }
-                notifyAllObservers(); 
-            }
-        });
+    public void deroulement() {
+        for (Terrain terrain : panel.getListeTerrain().getListeTerrain()) {
+            terrain.deplacerVoiture();
+        }
+        notifyAllObservers(); 
     }
     
     private void startTimerDefilementVoiture() {
-        this.timer.start(); 
+        this.activation = true; 
+        this.thread.start();
     }
     
     /**
      * Arreter le rafraichissement du timer. 
     */
     public void stopTimerDefilementVoiture() {
-        this.timer.stop();
+        this.activation = false; 
+    }
+    
+    public class ThreadDefilementVoiture implements Runnable {
+
+        @Override
+        public void run() {
+            while(activation){
+                try{
+                    Thread.sleep(25);
+                    deroulement(); 
+                }catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
     }
 }

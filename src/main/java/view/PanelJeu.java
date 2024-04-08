@@ -1,10 +1,9 @@
 package view;
 
+import controller.ControllerPersonnage;
 import java.awt.Graphics;
 import model.Terrain.ListeTerrain;
-import model.Terrain.Terrain;
 import model.Titre;
-import model.Vehicule.Vehicule;
 
 /**
  *
@@ -19,10 +18,9 @@ public class PanelJeu extends AbstractVue {
     public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
         this.titre = new Titre();
-        this.setFocusable(true);
         this.setTimerVoiture(); 
+        new ControllerPersonnage().controller(this); 
     }
-    
     
     @Override
     public void update() {
@@ -34,22 +32,8 @@ public class PanelJeu extends AbstractVue {
     */
     @Override
     public void paintComponent(final Graphics g) {
-        for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
-            Terrain terrain = this.getListeTerrain().
-                    getTerrainById(this.getListeTerrain().
-                            getListeSize() - i - 1); 
-            g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
-                    terrain.getLongueur(), terrain.getHauteur(), this);  
-            if (terrain.getType().equals("Route")) { 
-                for (Vehicule vec : terrain.getListeVehicule()) {
-                    g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(), 
-                         vec.getLongueur(), vec.getHauteur(), this);
-                }
-            }
-        }
-        g.drawImage(this.getPersonnage().getImage().getImage(), 
-                this.getPersonnage().getX(), this.getPersonnage().getY(), 
-                this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this); 
+        this.dessinerTerrain(g);
+        this.dessinerPersonnage(g);
+        this.dessinerVehicule(g);
     }
-    
 }

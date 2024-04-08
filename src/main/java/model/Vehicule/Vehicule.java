@@ -15,7 +15,7 @@ public abstract class Vehicule {
     
     private int hauteur; 
     private int longueur; 
-    private int vitesse = 2; 
+    private int vitesse; 
     private ImageIcon image; 
     private int x; 
     private int y; 
@@ -61,6 +61,10 @@ public abstract class Vehicule {
         this.y = y; 
     }
     
+    public void setVitesse(final int vitesse) {
+        this.vitesse = vitesse;
+    }
+    
     
     /**
     * Méthode qui instancie l'image du véhicule.
@@ -68,18 +72,13 @@ public abstract class Vehicule {
     */
     public void setImage(final ImageIcon image) {
         this.image = image; 
+        if (this.direction > 0) {
+            flipImageIconHorizontally(this.image); 
+        }
         setHauteur(); 
         setLongueur(); 
     }
     
-    /**
-    * Choisit aléatoirement la direction du véhicule.
-    */
-    public void setDirection() { 
-        if (this.direction > 0) { 
-            this.image = flipImageIconHorizontally(this.image); 
-        }
-    }
     /**
     * Initialise la hauteur selon la taille du terrain.
     */
@@ -94,10 +93,10 @@ public abstract class Vehicule {
         this.longueur = Math.round(this.image.getIconWidth() * DimensionFacteur.getFacteur()); 
     }
     
-     /**
+    /**
     * Effectuer un fli horizontale sur l'image. 
     */
-    public ImageIcon flipImageIconHorizontally(final ImageIcon icon) {
+    public void flipImageIconHorizontally(final ImageIcon icon) {
         Image image = icon.getImage();
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), 
                 image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -108,6 +107,11 @@ public abstract class Vehicule {
         g2d.drawImage(image, 0, 0, null);
         g2d.dispose();
 
-        return new ImageIcon(bufferedImage);
+        this.image = new ImageIcon(bufferedImage);
     }  
+    
+    /**
+    * Methode abstaite pour changer la couleur du véhicule.
+    */
+    public abstract void setRandomImage(); 
 }
