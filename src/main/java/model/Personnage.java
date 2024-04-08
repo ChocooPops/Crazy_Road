@@ -14,9 +14,10 @@ public final class Personnage {
     private int x; 
     private int y; 
     private static Personnage personnage; 
+    private boolean keyIsPressed;
 
     private Personnage() {
-
+        this.keyIsPressed = false; 
     }
     
     public int getHauteur() {
@@ -52,5 +53,61 @@ public final class Personnage {
             Personnage.personnage.hauteur = Math.round(facteur * hauteur); 
         }
         return Personnage.personnage; 
+    }
+    
+    /**
+     * 
+     */
+    public void keyRight() {
+        if (this.x + Math.round(18.4 * DimensionFacteur.getFacteur())
+                < DimensionFacteur.getLongueurFenetre()) {
+            this.x += Math.round(18.4 * DimensionFacteur.getFacteur()); 
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void keyLeft() {
+        if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
+            this.x -= Math.round(18.4 * DimensionFacteur.getFacteur()); 
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void keyUp() {
+        if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
+            this.y -= Math.round((242 / 12) * DimensionFacteur.getFacteur()); 
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void keyDown() {
+        if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur()) 
+                < DimensionFacteur.getHauteurFenetre()) {
+            this.y += Math.round((242 / 12) * DimensionFacteur.getFacteur()); 
+        }
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public boolean keyIsPressed() {
+        return this.keyIsPressed; 
+    }
+    
+    /**
+     * 
+     * @param op 
+     */
+    public void setKeyPressed(final boolean op) {
+        if (this.keyIsPressed != op) {
+            this.keyIsPressed = op;
+        }
     }
 }
