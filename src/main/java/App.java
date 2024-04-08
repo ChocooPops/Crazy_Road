@@ -14,10 +14,6 @@ public final class App {
         throw new AssertionError();
     }
 
-    private App() {
-
-    }
-
     /**
      * @param args the command line arguments
      */
