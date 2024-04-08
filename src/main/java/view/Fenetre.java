@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JFrame;
+import model.Terrain.ListeTerrain;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class Fenetre extends JFrame {
         if (Fenetre.fenetre == null) {
             Fenetre.fenetre = new Fenetre(); 
             Fenetre.fenetre.setTitle("Crazy Road");
-            Fenetre.fenetre.getContentPane().add(new PanelMenu()); 
+            Fenetre.fenetre.getContentPane().add(new PanelJeu(new ListeTerrain())); 
             Fenetre.fenetre.pack();
             Fenetre.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             Fenetre.fenetre.setResizable(false);

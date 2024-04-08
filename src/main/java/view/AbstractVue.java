@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
+import model.Personnage;
 import model.Terrain.ListeTerrain;
 
 /**
@@ -14,7 +15,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
     private int height = DimensionFacteur.getHauteurFenetre(); 
     
     private ListeTerrain listeTerrain; 
-    
+    private Personnage personnage; 
     /**
     * Constructeur de la classe AbstractVue.
     * Initialise la taille du panel.
@@ -29,5 +30,13 @@ public abstract class AbstractVue extends JPanel implements Observer {
     
     public void setListeTerrain(final ListeTerrain liste) {
         this.listeTerrain = liste; 
+    }
+    
+    public void setPersonnage(final Personnage personnage) {
+        this.personnage = personnage; 
+    }
+    
+    public Personnage getPersonnage() {
+        return this.personnage; 
     }
 }

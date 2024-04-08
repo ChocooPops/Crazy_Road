@@ -26,7 +26,6 @@ import model.Vehicule.Vehicule;
 public class PanelMenu extends AbstractVue {
     
     private JButton btJouer; 
-    private Personnage personnage; 
     private Titre titre; 
     private Timer timer;
     
@@ -37,7 +36,7 @@ public class PanelMenu extends AbstractVue {
     public PanelMenu() {
         this.titre = new Titre(); 
         this.setListeTerrain(new ListeTerrain());
-        this.personnage = Personnage.getPersonnage(); 
+        this.setPersonnage(Personnage.getPersonnage()); 
         this.setLayout(new BorderLayout());
         setPanelBouton(); 
         new TimerDefilementVoiture(this); 
@@ -80,9 +79,9 @@ public class PanelMenu extends AbstractVue {
                 }
             }
         }
-        g.drawImage(this.personnage.getImage().getImage(), 
-                this.personnage.getX(), this.personnage.getY(), 
-                this.personnage.getLongueur(), this.personnage.getHauteur(), this); 
+        g.drawImage(this.getPersonnage().getImage().getImage(), 
+                this.getPersonnage().getX(), this.getPersonnage().getY(), 
+                this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this); 
         g.drawImage(this.titre.getImage().getImage(), 
                 this.titre.getX(), this.titre.getY(), 
                 this.titre.getLongueur(), this.titre.getHauteur(), this); 
