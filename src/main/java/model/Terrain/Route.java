@@ -27,10 +27,15 @@ public class Route extends Terrain {
     @Override
     public void addVehicule(final int y) {
         int vehiculeY = y + Math.round(2 * DimensionFacteur.getFacteur());
-        int nbVehicule = 3; 
+        int nbVehicule;
         int longueurOldVec; 
         int direction = getRandomDirection(); 
         int typeVec = getRandomVehicule();
+        if (typeVec == 2) {
+            nbVehicule = 2 + new Random().nextInt(2); 
+        } else {
+            nbVehicule = 2 + new Random().nextInt(4); 
+        }
         if (direction > 0) {
             longueurOldVec = 0; 
         } else {
@@ -38,7 +43,11 @@ public class Route extends Terrain {
         }
         for (int i = 0; i < nbVehicule; i++) {
             int vehiculeX = 0; 
-            vehiculeX = longueurOldVec + this.getRandomX();
+            if (direction > 0) {
+                vehiculeX = longueurOldVec + this.getRandomX();
+            } else {
+                vehiculeX = longueurOldVec + this.getRandomX() - 20;
+            }
             Vehicule newVec = new VehiculeFactory()
                     .creationVehicule(typeVec, vehiculeX, vehiculeY, direction);
             this.listeVehicule.add(newVec);
@@ -49,8 +58,10 @@ public class Route extends Terrain {
     private int getRandomVehicule() {
         int vec = 0; 
         int nb = new Random().nextInt(10); 
-        if (nb >= 3) {
+        if (nb >= 4) {
             vec = 1; 
+        } else if (nb == 0) {
+            vec = 3; 
         } else {
             vec = 2; 
         }
@@ -74,16 +85,18 @@ public class Route extends Terrain {
         for (Vehicule vec : this.listeVehicule) {
             if (vec.getDirection() < 0 && vec.getX() + vec.getLongueur() < -40) {
                 vec.setX(DimensionFacteur.getLongueurFenetre());
+                vec.setRandomImage();
             } else if (vec.getDirection() > 0 && vec.getX() > DimensionFacteur.getLongueurFenetre() 
                     + vec.getLongueur()) {
                  vec.setX(-vec.getLongueur());
+                 vec.setRandomImage();
             }
             vec.setX(vec.getX() + vec.getVitesse() * vec.getDirection());    
         }
     }
     
     private int getRandomX() {
-        return Math.round((10 + new Random().nextInt(150)) * DimensionFacteur.getFacteur());
+        return Math.round((30 + new Random().nextInt(100)) * DimensionFacteur.getFacteur());
     }
     
     @Override

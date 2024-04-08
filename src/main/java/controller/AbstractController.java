@@ -1,16 +1,15 @@
 package controller;
 
-import javax.swing.JPanel;
+import view.AbstractVue;
 
 /**
- *
  * Classe abstraite pour controler les différents événements.
  */
 public abstract class AbstractController {
 
     /**
-     *Fonction pour controller.
+     * Fonction pour controller.
      */
-    public abstract void controller(JPanel panel);
+    public abstract void controller(AbstractVue panel);
 
 }

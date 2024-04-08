@@ -33,19 +33,20 @@ public final class Personnage {
     public int getY() {
         return this.y;
     }
-    public ImageIcon getImage() {
-        return this.image;
+    public int getDirection() {
+        return this.direction;
     }
-
     public void setX(final int x) {
         this.x = x;
     }
     public void setY(final int y) {
         this.y = y;
     }
-
     public void setDirection(final int direction) {
         this.direction = direction;
+    }
+    public ImageIcon getImage() {
+        return this.image;
     }
 
     /**
@@ -75,6 +76,7 @@ public final class Personnage {
                 < DimensionFacteur.getLongueurFenetre()) {
             this.x += Math.round(18.4 * DimensionFacteur.getFacteur());
         }
+        setDirection(4);
     }
 
     /**
@@ -84,6 +86,7 @@ public final class Personnage {
         if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
             this.x -= Math.round(18.4 * DimensionFacteur.getFacteur());
         }
+        setDirection(1);
     }
 
     /**
@@ -93,6 +96,7 @@ public final class Personnage {
         if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
             this.y -= Math.round((242 / 12) * DimensionFacteur.getFacteur());
         }
+        setDirection(2);
     }
 
     /**
@@ -103,6 +107,7 @@ public final class Personnage {
                 < DimensionFacteur.getHauteurFenetre()) {
             this.y += Math.round((242 / 12) * DimensionFacteur.getFacteur());
         }
+        setDirection(3);
     }
 
     /**
@@ -121,9 +126,5 @@ public final class Personnage {
         if (this.keyIsPressed != op) {
             this.keyIsPressed = op;
         }
-    }
-
-    public int getDirection() {
-        return this.direction;
     }
 }

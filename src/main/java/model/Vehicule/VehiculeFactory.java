@@ -25,6 +25,8 @@ public class VehiculeFactory {
                 break; 
             case 2 : vehicule = new Camion(x, y, direction); 
                 break; 
+            case 3 : vehicule = new Moto(x, y, direction); 
+                break; 
             default : vehicule = new Voiture(x, y, direction); 
                 break; 
         }

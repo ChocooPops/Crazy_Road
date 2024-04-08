@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JFrame;
+import model.Terrain.ListeTerrain;
 
 /**
  *
@@ -8,13 +9,15 @@ import javax.swing.JFrame;
  */
 public final class Fenetre extends JFrame {
     
+    private AbstractVue panel; 
+    
     private static Fenetre fenetre; 
     /**
     * Constructeur de la classe Fenetre.
     * Initialise les informations importantes de l'ecran.
     */
     private Fenetre() {
-       
+       this.setFocusable(false);
     }
     
     /**
@@ -35,12 +38,26 @@ public final class Fenetre extends JFrame {
         if (Fenetre.fenetre == null) {
             Fenetre.fenetre = new Fenetre(); 
             Fenetre.fenetre.setTitle("Crazy Road");
-            Fenetre.fenetre.getContentPane().add(new PanelMenu()); 
+            Fenetre.fenetre.panel = new PanelMenu(); 
+            Fenetre.fenetre.getContentPane().add(Fenetre.fenetre.panel); 
             Fenetre.fenetre.pack();
             Fenetre.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             Fenetre.fenetre.setResizable(false);
             Fenetre.fenetre.setLocationRelativeTo(null);
         }
         return Fenetre.fenetre; 
+    }
+    
+    /**
+    * Changement d'écran vers l'écran jeu. 
+    */
+    public void setEcranJeu(final ListeTerrain listeTerrain) {
+        Fenetre.fenetre.panel = new PanelJeu(listeTerrain); 
+        Fenetre.fenetre.getContentPane().removeAll(); 
+        Fenetre.fenetre.getContentPane().add(Fenetre.fenetre.panel); 
+        Fenetre.fenetre.revalidate();
+        Fenetre.fenetre.repaint();
+        Fenetre.fenetre.panel.setFocusable(true);
+        Fenetre.fenetre.panel.requestFocus();
     }
 }
