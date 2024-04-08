@@ -27,7 +27,10 @@ public class Camion extends Vehicule {
         this.setVitesse(3);
     }
     
-    public void setRandomImage(){
+    /**
+    * Mettre une couleur aléatoire au véhicule.
+    */
+    public void setRandomImage() {
         int nb = new Random().nextInt(3); 
         String src = ""; 
         switch (nb) {

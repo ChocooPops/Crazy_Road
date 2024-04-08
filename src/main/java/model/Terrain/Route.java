@@ -51,7 +51,7 @@ public class Route extends Terrain {
         int nb = new Random().nextInt(10); 
         if (nb >= 4) {
             vec = 1; 
-        }else if (nb==0) {
+        } else if (nb == 0) {
             vec = 3; 
         } else {
             vec = 2; 

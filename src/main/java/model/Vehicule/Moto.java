@@ -2,13 +2,12 @@ package model.Vehicule;
 
 import java.util.Random;
 import javax.swing.ImageIcon;
-import model.DimensionFacteur;
 
 /**
  *
  * @author p2203115
  */
-public class Moto extends Vehicule{
+public class Moto extends Vehicule {
     
     
     /**
@@ -25,7 +24,10 @@ public class Moto extends Vehicule{
         this.setVitesse(6);
     }
         
-    public void setRandomImage(){
+    /**
+    * Mettre une couleur aléatoire au véhicule.
+    */
+    public void setRandomImage() {
         int nb = new Random().nextInt(2); 
         String src = ""; 
         switch (nb) {
