@@ -1,7 +1,5 @@
 package model.Vehicule;
 
-import java.util.Random;
-
 /**
  *
  * @author ChocoPops
@@ -19,13 +17,18 @@ public class VehiculeFactory {
     /**
      * Création d'un véhicule aléatoire.
   */
-    public Vehicule creationVehicule() {
-        Vehicule vehicule = null; 
-        int nb = new Random().nextInt(10); 
-        if (nb >= 7) {
-            vehicule = new Voiture(); 
-        } else {
-            vehicule = new Camion(); 
+    public Vehicule creationVehicule(final int type, final int x, 
+            final int y, final int direction) {
+        Vehicule vehicule = null;
+        switch (type) {
+            case 1 : vehicule = new Voiture(x, y, direction); 
+                break; 
+            case 2 : vehicule = new Camion(x, y, direction); 
+                break; 
+            case 3 : vehicule = new Moto(x, y, direction); 
+                break; 
+            default : vehicule = new Voiture(x, y, direction); 
+                break; 
         }
         return vehicule; 
     }

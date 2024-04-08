@@ -11,10 +11,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
+import model.TimerDefilementVoiture;
 import model.Titre;
+import model.Vehicule.Vehicule;
 
 /**
  *
@@ -22,10 +25,10 @@ import model.Titre;
  */
 public class PanelMenu extends AbstractVue {
     
-    private ListeTerrain listeTerrain; 
     private JButton btJouer; 
     private Personnage personnage; 
     private Titre titre; 
+    private Timer timer;
     
     /**
     * Constructeur de la classe PanelMenu.
@@ -33,11 +36,11 @@ public class PanelMenu extends AbstractVue {
     */
     public PanelMenu() {
         this.titre = new Titre(); 
-        this.listeTerrain = new ListeTerrain(); 
+        this.setListeTerrain(new ListeTerrain());
         this.personnage = Personnage.getPersonnage(); 
         this.setLayout(new BorderLayout());
         setPanelBouton(); 
-        this.setFocusable(true);
+        new TimerDefilementVoiture(this); 
     }
     
     private void setPanelBouton() {
@@ -64,10 +67,18 @@ public class PanelMenu extends AbstractVue {
     */
     @Override
     public void paintComponent(final Graphics g) {
-        for (int j = 0; j < listeTerrain.getListeSize(); j++) {
-            Terrain terrain = listeTerrain.getTerrainById(j); 
+        for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
+            Terrain terrain = this.getListeTerrain().
+                    getTerrainById(this.getListeTerrain().
+                            getListeSize() - i - 1); 
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
-                    terrain.getLongueur(), terrain.getHauteur(), this); 
+                    terrain.getLongueur(), terrain.getHauteur(), this);  
+            if (terrain.getType().equals("Route")) { 
+                for (Vehicule vec : terrain.getListeVehicule()) {
+                    g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(), 
+                         vec.getLongueur(), vec.getHauteur(), this);
+                }
+            }
         }
         g.drawImage(this.personnage.getImage().getImage(), 
                 this.personnage.getX(), this.personnage.getY(), 
@@ -75,6 +86,15 @@ public class PanelMenu extends AbstractVue {
         g.drawImage(this.titre.getImage().getImage(), 
                 this.titre.getX(), this.titre.getY(), 
                 this.titre.getLongueur(), this.titre.getHauteur(), this); 
+    }
+    
+    /**
+     * Méthode pour faire avancer les voitures.
+     */
+
+    @Override
+    public void update() {
+        repaint(); 
     }
     
     /**
