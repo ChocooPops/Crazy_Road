@@ -1,5 +1,6 @@
 package model.Vehicule;
 
+import java.util.Random;
 import javax.swing.ImageIcon;
 import model.DimensionFacteur;
 
@@ -21,7 +22,25 @@ public class Camion extends Vehicule {
         super(x, y, direction);
         int yy = y - Math.round(16 * DimensionFacteur.getFacteur()); 
         this.setY(yy);
-        this.setImage(new ImageIcon("src/main/resources/vehicule/camion.png")); 
+        this.setRandomImage();
         setDirection();
+        this.setVitesse(3);
+    }
+    
+    public void setRandomImage(){
+        int nb = new Random().nextInt(3); 
+        String src = ""; 
+        switch (nb) {
+            case 0 : src = "src/main/resources/vehicule/camionOrange.png"; 
+                break; 
+            case 1 : src = "src/main/resources/vehicule/camionBleu.png"; 
+                break; 
+            case 2 : src = "src/main/resources/vehicule/camion.png"; 
+                break; 
+            default : src = "src/main/resources/vehicule/camion.png"; 
+                break; 
+        }
+        
+        this.setImage(new ImageIcon(src)); 
     }
 }
