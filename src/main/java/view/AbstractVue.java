@@ -1,5 +1,7 @@
 package view;
 
+import controller.AbstractController;
+import controller.ControllerPersonnage;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
@@ -18,5 +20,7 @@ public abstract class AbstractVue extends JPanel {
     */
     public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
+        AbstractController control = new ControllerPersonnage(); 
+        control.controller(this);
     }
 }

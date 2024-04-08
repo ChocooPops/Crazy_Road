@@ -1,5 +1,7 @@
 package view;
 
+import controller.AbstractController;
+import controller.ControllerPersonnage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -37,6 +39,7 @@ public class PanelMenu extends AbstractVue {
         this.personnage = Personnage.getPersonnage(); 
         this.setLayout(new BorderLayout());
         setPanelBouton(); 
+        this.setFocusable(true);
     }
     
     private void setPanelBouton() {
