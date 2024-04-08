@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.Personnage;
@@ -39,12 +42,20 @@ public class PanelMenu extends AbstractVue {
     private void setPanelBouton() {
         JPanel panelFlow = new JPanel(); 
         panelFlow.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.btJouer = new JButton("Jouer");
+        
+        Icon iconBoutonplay = new ImageIcon("src/main/resources/autres/boutonPlay.png");
+        this.btJouer = new JButton(iconBoutonplay);
+        btJouer.setOpaque(false);
+        btJouer.setContentAreaFilled(false);
+        btJouer.setBorderPainted(false);
+
         panelFlow.add(this.btJouer); 
         panelFlow.setBackground(new Color(0x1d1d1d));
         panelFlow.setBorder(
                 BorderFactory.createMatteBorder(5, 2, 0, 2, new Color(0x3f464f)));
         this.add(panelFlow, BorderLayout.SOUTH); 
+        
+        
     }
     
     /**
@@ -77,9 +88,12 @@ public class PanelMenu extends AbstractVue {
         * Definit l'écouteur du boton jouer. 
         */
         public EcouteurJouer() {
-            btJouer.addMouseListener(new MouseAdapter() {
+            btJouer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
                 
-            });
+            }
+        });
         }
     }
 }
