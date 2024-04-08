@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import model.DimensionFacteur;
 
@@ -26,8 +25,10 @@ public abstract class Vehicule {
     *
     * Constructeur de la classe Vehicule.
     */
-    public Vehicule(final int y) {
+    public Vehicule(final int x, final int y, final int direction) {
         this.y = y; 
+        this.x = x; 
+        this.direction = direction; 
     }
     
     public int getHauteur() {
@@ -56,7 +57,9 @@ public abstract class Vehicule {
     public void setX(final int x) {
         this.x = x;
     }
-    
+    public void setY(final int y) {
+        this.y = y; 
+    }
     
     
     /**
@@ -72,13 +75,8 @@ public abstract class Vehicule {
     /**
     * Choisit aléatoirement la direction du véhicule.
     */
-    public void setDirection() {
-        int nb = new Random().nextInt(2); 
-        if (nb == 0) {
-            this.direction = -1; 
-            this.x = DimensionFacteur.getLongueurFenetre() - getLongueur();
-        } else {
-            this.direction = 1; 
+    public void setDirection() { 
+        if (this.direction > 0) { 
             this.image = flipImageIconHorizontally(this.image); 
         }
     }

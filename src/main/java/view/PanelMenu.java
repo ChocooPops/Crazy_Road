@@ -4,17 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
+import model.TimerDefilementVoiture;
 import model.Titre;
 import model.Vehicule.Vehicule;
 
@@ -22,9 +20,8 @@ import model.Vehicule.Vehicule;
  *
  * @author ChocoPops
  */
-public class PanelMenu extends AbstractVue implements Observer {
+public class PanelMenu extends AbstractVue {
     
-    private ListeTerrain listeTerrain; 
     private JButton btJouer; 
     private Personnage personnage; 
     private Titre titre; 
@@ -36,19 +33,11 @@ public class PanelMenu extends AbstractVue implements Observer {
     */
     public PanelMenu() {
         this.titre = new Titre(); 
-        this.listeTerrain = new ListeTerrain(); 
+        this.setListeTerrain(new ListeTerrain());
         this.personnage = Personnage.getPersonnage(); 
         this.setLayout(new BorderLayout());
         setPanelBouton(); 
-        
-        timer = new Timer(1000 / 60, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                deplacerVoiture();
-                update();
-            }
-        });
-        timer.start();
+        new TimerDefilementVoiture(this); 
     }
     
     private void setPanelBouton() {
@@ -67,7 +56,10 @@ public class PanelMenu extends AbstractVue implements Observer {
     */
     @Override
     public void paintComponent(final Graphics g) {
-        for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
+        for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
+            Terrain terrain = this.getListeTerrain().
+                    getTerrainById(this.getListeTerrain().
+                            getListeSize() - i - 1); 
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(), 
                     terrain.getLongueur(), terrain.getHauteur(), this);  
             if (terrain.getType().equals("Route")) { 
@@ -84,29 +76,14 @@ public class PanelMenu extends AbstractVue implements Observer {
                 this.titre.getX(), this.titre.getY(), 
                 this.titre.getLongueur(), this.titre.getHauteur(), this); 
     }
-
-    @Override
-    public void update() {
-        repaint(); 
-    }
     
     /**
      * Méthode pour faire avancer les voitures.
      */
-    public void deplacerVoiture() {
-        for (Terrain terrain : listeTerrain.getListeTerrain()) {
-            if (terrain.getType().equals("Route")) { 
-                for (Vehicule vec : terrain.getListeVehicule()) {
-                    if (vec.getX() < -vec.getLongueur()) {
-                        vec.setX(DimensionFacteur.getLongueurFenetre());
-                    } else if (vec.getX() > DimensionFacteur.getLongueurFenetre() 
-                            + vec.getLongueur()) {
-                        vec.setX(-vec.getLongueur());
-                    }
-                    vec.setX(vec.getX() + vec.getVitesse() * vec.getDirection());
-                }
-            }
-        }
+
+    @Override
+    public void update() {
+        repaint(); 
     }
     
     /**

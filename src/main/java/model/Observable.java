@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author ChocoPops
  */
-public class Observable {
+public abstract class Observable {
     private List<Observer> observers = new ArrayList<>(); 
     private boolean state; 
     

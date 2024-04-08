@@ -80,6 +80,11 @@ public abstract class Terrain {
     */
     public void addVehicule(final int y) {
     }; 
+    
+    /**
+    * Methode override par les classes filles.
+    */
+    public void deplacerVoiture() { }; 
     public List<Vehicule> getListeVehicule() {
         return null; 
     }

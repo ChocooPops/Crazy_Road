@@ -32,8 +32,7 @@ public class ListeTerrain {
         terrain.setY(y);
         this.maxY = terrain.getY(); 
         if (terrain.getType().equals("Route")) {
-            int vehiculeY = maxY + Math.round(2 * DimensionFacteur.getFacteur());
-            terrain.addVehicule(vehiculeY);
+            terrain.addVehicule(y);
         }
         this.terrains.add(terrain); 
     }
