@@ -1,6 +1,11 @@
 package model.Vehicule;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import model.DimensionFacteur;
 
 /**
  *
@@ -10,17 +15,20 @@ public abstract class Vehicule {
     
     private int hauteur; 
     private int longueur; 
-    private int vitesse; 
+    private int vitesse = 2; 
     private ImageIcon image; 
     private int x; 
     private int y; 
+    private int direction;
     
     /**
- *
- * Constructeur de la classe.
- */
-    public Vehicule() {
-        
+    *
+    * Constructeur de la classe Vehicule.
+    */
+    public Vehicule(final int x, final int y, final int direction) {
+        this.y = y; 
+        this.x = x; 
+        this.direction = direction; 
     }
     
     public int getHauteur() {
@@ -41,5 +49,65 @@ public abstract class Vehicule {
     public int getVitesse() {
         return this.vitesse; 
     }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setX(final int x) {
+        this.x = x;
+    }
+    public void setY(final int y) {
+        this.y = y; 
+    }
     
+    
+    /**
+    * Méthode qui instancie l'image du véhicule.
+    * Change aussi les dimensions selon l'image.
+    */
+    public void setImage(final ImageIcon image) {
+        this.image = image; 
+        setHauteur(); 
+        setLongueur(); 
+    }
+    
+    /**
+    * Choisit aléatoirement la direction du véhicule.
+    */
+    public void setDirection() { 
+        if (this.direction > 0) { 
+            this.image = flipImageIconHorizontally(this.image); 
+        }
+    }
+    /**
+    * Initialise la hauteur selon la taille du terrain.
+    */
+    public void setHauteur() {
+        this.hauteur = Math.round(this.image.getIconHeight() * DimensionFacteur.getFacteur()); 
+    }
+    
+    /**
+    * Initialise la longueur selon la taille du terrain.
+    */
+    public void setLongueur() {
+        this.longueur = Math.round(this.image.getIconWidth() * DimensionFacteur.getFacteur()); 
+    }
+    
+     /**
+    * Effectuer un fli horizontale sur l'image. 
+    */
+    public ImageIcon flipImageIconHorizontally(final ImageIcon icon) {
+        Image image = icon.getImage();
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), 
+                image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D) bufferedImage.getGraphics();
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-image.getWidth(null), 0);
+        g2d.setTransform(tx);
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        return new ImageIcon(bufferedImage);
+    }  
 }
