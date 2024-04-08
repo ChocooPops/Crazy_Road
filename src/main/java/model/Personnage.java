@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
  *
  * @author ChocoPops
  */
-public final class Personnage{
+public final class Personnage {
     
     private int hauteur; 
     private int longueur; 
@@ -55,29 +55,58 @@ public final class Personnage{
         return Personnage.personnage; 
     }
     
-    public void keyRight(){
-        if (this.x + Math.round(18.4*DimensionFacteur.getFacteur()) < DimensionFacteur.getLongueurFenetre())
-            this.x += Math.round(18.4*DimensionFacteur.getFacteur()); 
-        
+    /**
+     * 
+     */
+    public void keyRight() {
+        if (this.x + Math.round(18.4 * DimensionFacteur.getFacteur())
+                < DimensionFacteur.getLongueurFenetre()) {
+            this.x += Math.round(18.4 * DimensionFacteur.getFacteur()); 
+        }
     }
-    public void keyLeft(){
-        if (this.x - Math.round(18.4*DimensionFacteur.getFacteur()) >= 0)
-            this.x -= Math.round(18.4*DimensionFacteur.getFacteur()); 
-        
+    
+    /**
+     * 
+     */
+    public void keyLeft() {
+        if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
+            this.x -= Math.round(18.4 * DimensionFacteur.getFacteur()); 
+        }
     }
-    public void keyUp(){
-        if (this.y - Math.round((242/12)*DimensionFacteur.getFacteur()) > 0)
-            this.y -= Math.round((242/12)*DimensionFacteur.getFacteur()); 
+    
+    /**
+     * 
+     */
+    public void keyUp() {
+        if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
+            this.y -= Math.round((242 / 12) * DimensionFacteur.getFacteur()); 
+        }
     }
-    public void keyDown(){
-        if (this.y + Math.round((242/12)*DimensionFacteur.getFacteur()) < DimensionFacteur.getHauteurFenetre())
-            this.y += Math.round((242/12)*DimensionFacteur.getFacteur()); 
+    
+    /**
+     * 
+     */
+    public void keyDown() {
+        if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur()) 
+                < DimensionFacteur.getHauteurFenetre()) {
+            this.y += Math.round((242 / 12) * DimensionFacteur.getFacteur()); 
+        }
     }
-    public boolean keyIsPressed(){
+    
+    /**
+     * 
+     * @return 
+     */
+    public boolean keyIsPressed() {
         return this.keyIsPressed; 
     }
-    public void setKeyPressed(boolean op){
-        if(this.keyIsPressed != op){
+    
+    /**
+     * 
+     * @param op 
+     */
+    public void setKeyPressed(final boolean op) {
+        if (this.keyIsPressed != op) {
             this.keyIsPressed = op;
         }
     }

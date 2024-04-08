@@ -1,7 +1,5 @@
 package view;
 
-import controller.AbstractController;
-import controller.ControllerPersonnage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
