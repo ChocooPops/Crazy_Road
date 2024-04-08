@@ -30,7 +30,10 @@ public class ListeTerrain {
         Terrain terrain = new TerrainFactory().creationTerrain(); 
         int y = this.maxY - terrain.getHauteur(); 
         terrain.setY(y);
-        this.maxY = terrain.getY(); 
+        this.maxY = terrain.getY();
+        if (terrain.getType().equals("Champ")) {
+            terrain.addCollision(y);
+        }
         if (terrain.getType().equals("Route")) {
             terrain.addVehicule(y);
         }

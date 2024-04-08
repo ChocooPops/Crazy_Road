@@ -1,5 +1,6 @@
 package model.Terrain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import model.DimensionFacteur;
@@ -74,7 +75,15 @@ public abstract class Terrain {
     public void setY(final int y) {
         this.y = y; 
     }
-    
+
+    /**
+     *
+     * Methode override par les classes filles.
+     * @param y
+     */
+    public void addCollision(final int y) {
+    };
+
     /**
     * Methode override par les classes filles.
     */
@@ -88,4 +97,10 @@ public abstract class Terrain {
     public List<Vehicule> getListeVehicule() {
         return null; 
     }
+
+    /**
+     * Methode override par les classes filles. Pour la liste des hitbox.
+     * @return
+     */
+    public abstract ArrayList<HitBox> getHitBoxes();
 }

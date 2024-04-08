@@ -90,4 +90,9 @@ public class Route extends Terrain {
     public List<Vehicule> getListeVehicule() {
         return this.listeVehicule; 
     }
+
+    @Override
+    public ArrayList<HitBox> getHitBoxes() {
+        return null;
+    }
 }
