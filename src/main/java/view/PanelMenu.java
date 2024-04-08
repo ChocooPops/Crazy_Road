@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.TimerDefilementVoiture;
+import model.DefilementVoiture;
 import model.Titre;
 
 /**
@@ -26,7 +26,7 @@ public class PanelMenu extends AbstractVue {
     
     private JButton btJouer; 
     private Titre titre; 
-    private TimerDefilementVoiture timer;
+    private DefilementVoiture timer;
     
     /**
     * Constructeur de la classe PanelMenu.

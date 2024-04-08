@@ -27,10 +27,15 @@ public class Route extends Terrain {
     @Override
     public void addVehicule(final int y) {
         int vehiculeY = y + Math.round(2 * DimensionFacteur.getFacteur());
-        int nbVehicule = 2 + new Random().nextInt(3); 
+        int nbVehicule;
         int longueurOldVec; 
         int direction = getRandomDirection(); 
         int typeVec = getRandomVehicule();
+        if (typeVec == 2) {
+            nbVehicule = 2 + new Random().nextInt(2); 
+        } else {
+            nbVehicule = 2 + new Random().nextInt(4); 
+        }
         if (direction > 0) {
             longueurOldVec = 0; 
         } else {

@@ -7,7 +7,7 @@ import view.AbstractVue;
  *
  * @author ChocoPops
  */
-public class TimerDefilementVoiture extends Observable {
+public class DefilementVoiture extends Observable {
     private AbstractVue panel; 
     private boolean activation; 
     private Thread thread; 
@@ -17,7 +17,7 @@ public class TimerDefilementVoiture extends Observable {
      * Se rafraichit toutes les 60 frames. 
      * Fait deplacer les voitures du panel.
     */
-    public TimerDefilementVoiture(final AbstractVue panel) {
+    public DefilementVoiture(final AbstractVue panel) {
         this.activation = true; 
         this.addObserver(panel);
         this.panel = panel; 
@@ -25,6 +25,9 @@ public class TimerDefilementVoiture extends Observable {
         this.startTimerDefilementVoiture();
     }
     
+    /**
+    * Definit le deroulement du deplacement des voitures dans le thread. 
+    */
     public void deroulement() {
         for (Terrain terrain : panel.getListeTerrain().getListeTerrain()) {
             terrain.deplacerVoiture();
@@ -38,25 +41,27 @@ public class TimerDefilementVoiture extends Observable {
     }
     
     /**
-     * Arreter le rafraichissement du timer. 
+     * Arreter le rafraichissement du thread. 
     */
     public void stopTimerDefilementVoiture() {
         this.activation = false; 
     }
     
+    /**
+    * Sous classe qui lance un thread.  
+    */
     public class ThreadDefilementVoiture implements Runnable {
 
         @Override
         public void run() {
-            while(activation){
-                try{
+            while (activation) {
+                try {
                     Thread.sleep(25);
                     deroulement(); 
-                }catch(InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
-        
     }
 }
