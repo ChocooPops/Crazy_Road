@@ -15,7 +15,7 @@ public abstract class Vehicule {
     
     private int hauteur; 
     private int longueur; 
-    private int vitesse = 2; 
+    private int vitesse; 
     private ImageIcon image; 
     private int x; 
     private int y; 
@@ -59,6 +59,10 @@ public abstract class Vehicule {
     }
     public void setY(final int y) {
         this.y = y; 
+    }
+    
+    public void setVitesse(final int vitesse) {
+        this.vitesse = vitesse;
     }
     
     
@@ -110,4 +114,5 @@ public abstract class Vehicule {
 
         return new ImageIcon(bufferedImage);
     }  
+    
 }
