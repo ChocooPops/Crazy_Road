@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
+import model.TimerDefilementVoiture;
 
 /**
  *
@@ -16,12 +17,15 @@ public abstract class AbstractVue extends JPanel implements Observer {
     
     private ListeTerrain listeTerrain; 
     private Personnage personnage; 
+    private TimerDefilementVoiture timerVoiture; 
+    
     /**
     * Constructeur de la classe AbstractVue.
     * Initialise la taille du panel.
     */
     public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
+        this.personnage = Personnage.getPersonnage();
     }
     
     public ListeTerrain getListeTerrain() {
@@ -38,5 +42,16 @@ public abstract class AbstractVue extends JPanel implements Observer {
     
     public Personnage getPersonnage() {
         return this.personnage; 
+    }
+    
+    public TimerDefilementVoiture getTimerVoiture() {
+        return this.timerVoiture; 
+    }
+    
+    /**
+    * Instancier un nouveau timer.
+    */
+    public void setTimerVoiture() {
+        this.timerVoiture = new TimerDefilementVoiture(this); 
     }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerBoutonJouer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -11,8 +12,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.TimerDefilementVoiture;
@@ -27,7 +26,7 @@ public class PanelMenu extends AbstractVue {
     
     private JButton btJouer; 
     private Titre titre; 
-    private Timer timer;
+    private TimerDefilementVoiture timer;
     
     /**
     * Constructeur de la classe PanelMenu.
@@ -36,10 +35,10 @@ public class PanelMenu extends AbstractVue {
     public PanelMenu() {
         this.titre = new Titre(); 
         this.setListeTerrain(new ListeTerrain());
-        this.setPersonnage(Personnage.getPersonnage()); 
         this.setLayout(new BorderLayout());
-        setPanelBouton(); 
-        new TimerDefilementVoiture(this); 
+        this.setPanelBouton(); 
+        this.setTimerVoiture(); 
+        new EcouteurJouer(this); 
     }
     
     private void setPanelBouton() {
@@ -107,11 +106,11 @@ public class PanelMenu extends AbstractVue {
         *
         * Definit l'écouteur du boton jouer. 
         */
-        public EcouteurJouer() {
+        public EcouteurJouer(AbstractVue panel) {
             btJouer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                
+                new ControllerBoutonJouer().controller(panel);
             }
         });
         }

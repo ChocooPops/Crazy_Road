@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Graphics;
-import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.Titre;
@@ -19,9 +18,9 @@ public class PanelJeu extends AbstractVue {
     */
     public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
-        this.setPersonnage(Personnage.getPersonnage());
         this.titre = new Titre();
         this.setFocusable(true);
+        this.setTimerVoiture(); 
     }
     
     

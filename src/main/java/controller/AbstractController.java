@@ -1,5 +1,7 @@
 package controller;
 
+import view.AbstractVue;
+
 /**
  *
  * Classe abstraite pour controler les différents événements. 
@@ -7,8 +9,8 @@ package controller;
 public abstract class AbstractController {
     
     /**
- *Fonction pour controller.
- */
-    public abstract void controller(); 
+    *Fonction pour controller.
+    */
+    public abstract void controller(AbstractVue panel); 
     
 }

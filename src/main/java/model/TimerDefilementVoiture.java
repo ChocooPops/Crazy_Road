@@ -13,6 +13,7 @@ import view.AbstractVue;
 public class TimerDefilementVoiture extends Observable {
     private Timer timer; 
     private AbstractVue panel; 
+    
     /**
      * Constructeur de la classe Timer qui observe le panel.
      * Se rafraichit toutes les 60 frames. 
@@ -41,7 +42,10 @@ public class TimerDefilementVoiture extends Observable {
         this.timer.start(); 
     }
     
-    private void stopTimerDefilementVoiture() {
+    /**
+     * Arreter le rafraichissement du timer. 
+    */
+    public void stopTimerDefilementVoiture() {
         this.timer.stop();
     }
 }
