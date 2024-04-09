@@ -20,7 +20,7 @@ il vous suffit simplement de faire un : `mvn test`<br>
 ### Quel design pattern ?
 > Nous avons utilisé le design pattern MVC et Strategy pour notre projet.
 
-> Nous avons aussi utilisé les design pattern Observer pour la gestion des collisions, mais nous avons aussi utilisé le design pattern Singleton sur la classe [Personnage.java](./src/main/java/model/Personnage.java) et [Fenetre.java](./src/main/java/view/Fenetre.java) car il y a besoin que d'un seul personnage dans le jeu.
+> Nous avons aussi utilisé les design pattern Observer pour la gestion des collisions, mais nous avons aussi utilisé le design pattern Singleton sur la classe [Personnage.java](./src/main/java/model/Personnage.java) et [Fenetre.java](./src/main/java/view/Fenetre.java) car il n'y a besoin que d'un seul personnage et d'une seule fenetre dans le jeu.
 
 > Nous avons aussi utilisé le design pattern Factory pour le terrain : [TerrainFactory.java](./src/main/java/model/Terrain/TerrainFactory.java), mais aussi pour les véhicules : [VehiculeFactory.java](./src/main/java/model/Vehicule/VehiculeFactory.java) car nous avons jugé qu'il était préférable que la création d'un véhicule peu importe le type soit 100% aléatoire.
 
