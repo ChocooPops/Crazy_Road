@@ -36,5 +36,6 @@ public class PanelJeu extends AbstractVue {
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
         this.verifierHitBox(g);
+        this.dessinerScore(g);
     }
 }

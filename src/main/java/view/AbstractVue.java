@@ -8,9 +8,8 @@ import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.DefilementVoiture;
 import model.Vehicule.Vehicule;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Graphics;
+
+import java.awt.*;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -132,6 +131,12 @@ public abstract class AbstractVue extends JPanel implements Observer {
         g.drawImage(this.getPersonnage().getImage().getImage(),
                 this.getPersonnage().getX(), this.getPersonnage().getY(),
                 this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this);
+    }
+
+    public void dessinerScore(final Graphics g) {
+        g.setColor(Color.black);
+        g.setFont(new Font("impact", Font.BOLD, 20));
+        g.drawString("Score : " + this.personnage.getScore(), 10, 20);
     }
 }
 

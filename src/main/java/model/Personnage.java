@@ -16,6 +16,8 @@ public final class Personnage {
     private static Personnage personnage;
     private boolean keyIsPressed;
     private int direction;
+    private int score = 0;
+    private int verifScore = 0;
 
     private Personnage() {
         this.keyIsPressed = false;
@@ -47,6 +49,9 @@ public final class Personnage {
     }
     public ImageIcon getImage() {
         return this.image;
+    }
+    public int getScore() {
+        return this.score;
     }
 
     /**
@@ -95,6 +100,11 @@ public final class Personnage {
     public void keyUp() {
         if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
             this.y -= Math.round((242 / 12) * DimensionFacteur.getFacteur());
+
+            verifScore++;
+            if (verifScore > score) {
+                score = verifScore;
+            }
         }
         setDirection(2);
     }
@@ -106,6 +116,8 @@ public final class Personnage {
         if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getHauteurFenetre()) {
             this.y += Math.round((242 / 12) * DimensionFacteur.getFacteur());
+
+            verifScore--;
         }
         setDirection(3);
     }
