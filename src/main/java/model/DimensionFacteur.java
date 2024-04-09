@@ -6,7 +6,7 @@ package model;
  */
 public final class DimensionFacteur {
     
-    private static float facteur = (float) 2.45; 
+    private static float facteur = (float) 3.5; 
     private static int width = Math.round(200 * DimensionFacteur.getFacteur()); 
     private static int height = Math.round(20 * 16 * DimensionFacteur.getFacteur()); 
     

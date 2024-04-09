@@ -3,6 +3,7 @@ package model.Terrain;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import model.DimensionFacteur;
 
 /**
  *
@@ -12,10 +13,11 @@ public class Champ extends Terrain {
 
     private ArrayList<HitBox> listeArbre = new ArrayList<>();
     private int typeTerrain;
+    private float facteur = DimensionFacteur.getFacteur(); 
 
     /**
     * Instancie le type de terrain "Champ" et son image.
-     * @param debut
+    * @param debut
     */
     public Champ(final boolean debut) {
         if (debut) {
@@ -32,8 +34,8 @@ public class Champ extends Terrain {
     }
 
     /**
-   * Choisit une image du terrain parmis six images.
-   */
+    * Choisit une image du terrain parmis six images.
+    */
     private String setImageChamp() {
         int nb = new Random().nextInt(6);
         this.typeTerrain = nb;
@@ -70,41 +72,46 @@ public class Champ extends Terrain {
     public void addCollision(final int y) {
         switch (this.typeTerrain) {
             case 0 :
-                listeArbre.add(new HitBox(91, y));
-                listeArbre.add(new HitBox(355, y));
+                listeArbre.add(new HitBox(this.convertir(37), y));
+                listeArbre.add(new HitBox(this.convertir(145), y));
                 break;
             case 1 :
-                listeArbre.add(new HitBox(2, y));
-                listeArbre.add(new HitBox(50, y));
-                listeArbre.add(new HitBox(399, y));
-                listeArbre.add(new HitBox(444, y));
+                listeArbre.add(new HitBox(this.convertir(1), y));
+                listeArbre.add(new HitBox(this.convertir(19), y));
+                listeArbre.add(new HitBox(this.convertir(163), y));
+                listeArbre.add(new HitBox(this.convertir(181), y));
                 break;
             case 2 :
-                listeArbre.add(new HitBox(132, y));
-                listeArbre.add(new HitBox(178, y));
-                listeArbre.add(new HitBox(399, y));
+                listeArbre.add(new HitBox(this.convertir(55), y));
+                listeArbre.add(new HitBox(this.convertir(73), y));
+                listeArbre.add(new HitBox(this.convertir(163), y));
                 break;
             case 3 :
-                listeArbre.add(new HitBox(50, y));
-                listeArbre.add(new HitBox(91, y));
-                listeArbre.add(new HitBox(132, y));
-                listeArbre.add(new HitBox(267, y));
-                listeArbre.add(new HitBox(444, y));
+                listeArbre.add(new HitBox(this.convertir(19), y));
+                listeArbre.add(new HitBox(this.convertir(37), y));
+                listeArbre.add(new HitBox(this.convertir(55), y));
+                listeArbre.add(new HitBox(this.convertir(109), y));
+                listeArbre.add(new HitBox(this.convertir(181), y));
                 break;
             case 4 :
-                listeArbre.add(new HitBox(2, y));
-                listeArbre.add(new HitBox(222, y));
+                listeArbre.add(new HitBox(this.convertir(1), y));
+                listeArbre.add(new HitBox(this.convertir(91), y));
                 break;
             default :
-                listeArbre.add(new HitBox(91, y + 47));
-                listeArbre.add(new HitBox(132, y + 47));
-                listeArbre.add(new HitBox(399, y + 47));
-                listeArbre.add(new HitBox(222, y + 47));
-                listeArbre.add(new HitBox(2, y));
-                listeArbre.add(new HitBox(132, y));
-                listeArbre.add(new HitBox(267, y));
-                listeArbre.add(new HitBox(399, y));
+                int hauteur2 = Math.round(20 * DimensionFacteur.getFacteur()); 
+                listeArbre.add(new HitBox(this.convertir(1), y));
+                listeArbre.add(new HitBox(this.convertir(55), y));
+                listeArbre.add(new HitBox(this.convertir(109), y));
+                listeArbre.add(new HitBox(this.convertir(163), y));
+                listeArbre.add(new HitBox(this.convertir(37), y + hauteur2));
+                listeArbre.add(new HitBox(this.convertir(55), y + hauteur2));
+                listeArbre.add(new HitBox(this.convertir(91), y + hauteur2));
+                listeArbre.add(new HitBox(this.convertir(163), y + hauteur2));
                 break;
         }
     };
+    
+    private int convertir(int nb) {
+        return Math.round(this.facteur * nb); 
+    }
 }
