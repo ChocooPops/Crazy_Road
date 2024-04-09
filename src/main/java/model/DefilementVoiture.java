@@ -56,7 +56,7 @@ public class DefilementVoiture extends Observable {
         public void run() {
             while (activation) {
                 try {
-                    Thread.sleep(25);
+                    Thread.sleep(30);
                     deroulement(); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -15,9 +15,14 @@ public class Champ extends Terrain {
 
     /**
     * Instancie le type de terrain "Champ" et son image.
+     * @param debut
     */
-    public Champ() {
-        this.setImage(new ImageIcon(this.setImageChamp()));
+    public Champ(final boolean debut) {
+        if (debut) {
+            this.setImage(new ImageIcon(this.setImageBeginChamp()));
+        } else {
+            this.setImage(new ImageIcon(this.setImageChamp()));
+        }
         this.setType("Champ");
     }
 
@@ -56,6 +61,11 @@ public class Champ extends Terrain {
         return src; 
     }
 
+    private String setImageBeginChamp() {
+        this.typeTerrain = 0; 
+        return "src/main/resources/terrain/terrain1.png";        
+    }
+    
     @Override
     public void addCollision(final int y) {
         switch (this.typeTerrain) {

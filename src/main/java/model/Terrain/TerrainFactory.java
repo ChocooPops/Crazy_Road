@@ -1,7 +1,6 @@
 package model.Terrain;
 
 import java.util.Random;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,12 +23,11 @@ public class TerrainFactory {
     public Terrain creationTerrain() {
         Terrain terrain = null; 
         if (TerrainFactory.nbTerrainCreate < 3) {
-            terrain = new Champ(); 
-            terrain.setImage(new ImageIcon("src/main/resources/terrain/terrain1.png"));
+            terrain = new Champ(true); 
         } else {
             int nb = new Random().nextInt(10); 
             if (nb >= 6) {
-                terrain = new Champ(); 
+                terrain = new Champ(false); 
             } else {
                 terrain = new Route();
             }
