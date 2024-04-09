@@ -53,7 +53,7 @@ public final class Personnage {
      *
      * Recupérer le personnage s'il est déjà créer ou le creer.
      */
-    public static Personnage getPersonnage() {
+    public static synchronized Personnage getPersonnage() {
         if (Personnage.personnage == null) {
             float facteur = DimensionFacteur.getFacteur();
             Personnage.personnage = new Personnage();
