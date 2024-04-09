@@ -3,13 +3,11 @@ package view;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Personnage;
-import model.Terrain.HitBox;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.Thread.DefilementVoiture;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -85,12 +83,6 @@ public abstract class AbstractVue extends JPanel implements Observer {
                 for (Vehicule vec : terrain.getListeVehicule()) {
                     g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(),
                             vec.getLongueur(), vec.getHauteur(), this);
-                }
-            } else {
-                for (HitBox hitBox : terrain.getHitBoxes()) {
-                    g.setColor(Color.RED);
-                    g.drawRect(hitBox.getX(), hitBox.getY(),
-                            hitBox.getLongueur(), hitBox.getHauteur());
                 }
             }
         }

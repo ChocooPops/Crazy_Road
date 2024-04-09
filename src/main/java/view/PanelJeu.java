@@ -3,6 +3,7 @@ package view;
 import controller.ControllerPersonnage;
 import java.awt.Graphics;
 import model.Terrain.ListeTerrain;
+import model.Thread.DefilementMaps;
 import model.Titre;
 
 /**
@@ -21,6 +22,7 @@ public class PanelJeu extends AbstractVue {
         this.setTimerVoiture(); 
         new ControllerPersonnage().controller(this);
         this.getPersonnage().setListHitbox(this.getListeTerrain());
+        new DefilementMaps(this); 
     }
     
     @Override
@@ -33,6 +35,7 @@ public class PanelJeu extends AbstractVue {
     */
     @Override
     public void paintComponent(final Graphics g) {
+        super.paintComponent(g);
         this.dessinerTerrain(g);
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);

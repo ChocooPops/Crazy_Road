@@ -83,4 +83,11 @@ public class HitBox {
                 && this.y + this.hauteur > personnage.getY() + newY;
        
     }
+    
+    /**
+     * Fait descendre la hitbox.
+     */
+    public void setDescenteHitBox(final int vitesse) {
+        this.y += vitesse; 
+    }
 }

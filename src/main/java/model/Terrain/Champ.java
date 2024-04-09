@@ -114,4 +114,15 @@ public class Champ extends Terrain {
     private int convertir(final int nb) {
         return Math.round(this.facteur * nb); 
     }
+
+    /**
+     * Fait descendre tous les éléments liés au terrain. 
+     */
+    @Override
+    public void setDescenteAllElementTerrain() {
+        this.setDescenteTerrain();
+        for (HitBox hitbox : this.listeArbre) {
+            hitbox.setDescenteHitBox(this.getVitesse());
+        }
+    }
 }

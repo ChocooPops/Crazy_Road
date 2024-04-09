@@ -11,21 +11,20 @@ import model.Terrain.Terrain;
  */
 public final class Personnage {
 
+    private static Personnage personnage;
     private int hauteur;
     private int longueur;
     private ImageIcon image;
     private int x;
     private int y;
-    private static Personnage personnage;
-    private boolean keyIsPressed;
     private ListeTerrain listeHitbox; 
-    private int newX = Math.round((92 / 5) * DimensionFacteur.getFacteur()); 
-    private int newY = Math.round((242 / 12) * DimensionFacteur.getFacteur());
-
-    private Personnage() {
-        this.keyIsPressed = false;
-    }
-
+    private int avancementX = Math.round((92 / 5) * DimensionFacteur.getFacteur()); 
+    private int avancementY = Math.round((242 / 12) * DimensionFacteur.getFacteur());
+    private boolean keyDroite; 
+    private boolean keyGauche; 
+    private boolean keyHaut; 
+    private boolean keyBas; 
+    
     public int getHauteur() {
         return this.hauteur;
     }
@@ -51,10 +50,10 @@ public final class Personnage {
         return this.image;
     }
     public int getAvancementX() {
-        return this.newX; 
+        return this.avancementX; 
     }
     public int getAvancementY() {
-        return this.newY; 
+        return this.avancementY; 
     }
     /**
      *
@@ -82,7 +81,7 @@ public final class Personnage {
         if (this.checkCollision(1)) {
             if (this.x + Math.round(18.4 * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getLongueurFenetre()) {
-                this.x += this.newX; 
+                this.keyDroite = true; 
             }
         }
     }
@@ -93,7 +92,7 @@ public final class Personnage {
     public void keyLeft() {
         if (this.checkCollision(2)) {
             if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
-                this.x -= this.newX;
+                this.keyGauche = true; 
             }
         }
     }
@@ -104,7 +103,7 @@ public final class Personnage {
     public void keyUp() {
         if (this.checkCollision(3)) {
             if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
-                this.y -= this.newY; 
+                this.keyHaut = true; 
             }
         }
     }
@@ -116,17 +115,31 @@ public final class Personnage {
         if (this.checkCollision(4)) {
             if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getHauteurFenetre()) {
-                this.y += this.newY; 
+                this.keyBas = true; 
             }
         }
     }
-
+    
     /**
-     *
-     * @return
+     * Dit au personnage s'il peut avancer ou non selon sa clé.
      */
-    public boolean keyIsPressed() {
-        return this.keyIsPressed;
+    public void actionBouton() {
+        if (keyDroite) {
+            this.x += this.avancementX; 
+            this.keyDroite = false; 
+        }
+        if (keyGauche) {
+            this.x -= this.avancementX; 
+            this.keyGauche = false; 
+        }
+        if (keyBas) {
+            this.y += this.avancementY;  
+            this.keyBas = false; 
+        }
+        if (keyHaut) {
+            this.y -= this.avancementY; 
+            this.keyHaut = false; 
+        }
     }
     
     /**
@@ -148,14 +161,11 @@ public final class Personnage {
         }
         return op; 
     }
-
+    
     /**
-     *
-     * @param op
+     * Fait descendre le personnage.
      */
-    public void setKeyPressed(final boolean op) {
-        if (this.keyIsPressed != op) {
-            this.keyIsPressed = op;
-        }
+    public void setDescente() {
+        this.y += DimensionFacteur.getVitesseMap(); 
     }
 }

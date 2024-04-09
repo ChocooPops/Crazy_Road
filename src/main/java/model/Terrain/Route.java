@@ -108,4 +108,12 @@ public class Route extends Terrain {
     public ArrayList<HitBox> getHitBoxes() {
         return null;
     }
+    
+    @Override
+    public void setDescenteAllElementTerrain() {
+        this.setDescenteTerrain();
+        for (Vehicule vec : this.listeVehicule) {
+            vec.setDescenteVehicule(this.getVitesse());
+        }
+    }
 }

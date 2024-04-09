@@ -114,4 +114,11 @@ public abstract class Vehicule {
     * Methode abstaite pour changer la couleur du véhicule.
     */
     public abstract void setRandomImage(); 
+    
+    /**
+     * Fait descendre le véhicule.
+     */
+    public void setDescenteVehicule(final int vitesse) {
+        this.y += vitesse; 
+    }
 }

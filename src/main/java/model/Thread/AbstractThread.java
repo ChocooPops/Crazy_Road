@@ -16,9 +16,11 @@ public abstract class AbstractThread extends Observable implements Runnable {
     /**
     * Constructeur de la classe AbstractThread.
     */
-    public AbstractThread() {
+    public AbstractThread(final AbstractVue panel) {
+        this.setPanel(panel);
         this.setThead(this);
         this.setActivation(true);
+        this.getThread().start(); 
     }
     
     public AbstractVue getPanel() {

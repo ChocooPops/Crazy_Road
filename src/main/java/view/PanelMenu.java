@@ -75,6 +75,7 @@ public class PanelMenu extends AbstractVue {
      */
     @Override
     public void paintComponent(final Graphics g) {
+        super.paintComponent(g);
         this.dessinerTerrain(g);
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
