@@ -11,7 +11,7 @@ public class ControllerBoutonJouer extends AbstractController {
 
     @Override
     public void controller(final AbstractVue panel) {
-        panel.getTimerVoiture().stopTimerDefilementVoiture();
+        panel.getTimerVoiture().setActivation(false);
         Fenetre.getFenetre().setEcranJeu(panel.getListeTerrain());
     }
     

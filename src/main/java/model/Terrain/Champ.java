@@ -111,7 +111,7 @@ public class Champ extends Terrain {
         }
     };
     
-    private int convertir(int nb) {
+    private int convertir(final int nb) {
         return Math.round(this.facteur * nb); 
     }
 }

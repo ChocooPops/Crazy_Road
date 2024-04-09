@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.DefilementVoiture;
+import model.Thread.DefilementVoiture;
 import model.Titre;
 
 /**

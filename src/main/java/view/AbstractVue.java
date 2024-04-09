@@ -6,7 +6,7 @@ import model.Personnage;
 import model.Terrain.HitBox;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
-import model.DefilementVoiture;
+import model.Thread.DefilementVoiture;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
 import java.awt.Color;
