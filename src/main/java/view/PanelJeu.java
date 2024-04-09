@@ -19,7 +19,8 @@ public class PanelJeu extends AbstractVue {
         this.setListeTerrain(listeTerrain);
         this.titre = new Titre();
         this.setTimerVoiture(); 
-        new ControllerPersonnage().controller(this); 
+        new ControllerPersonnage().controller(this);
+        this.getPersonnage().setListHitbox(this.getListeTerrain());
     }
     
     @Override
@@ -35,6 +36,5 @@ public class PanelJeu extends AbstractVue {
         this.dessinerTerrain(g);
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
-        this.verifierHitBox(g);
     }
 }

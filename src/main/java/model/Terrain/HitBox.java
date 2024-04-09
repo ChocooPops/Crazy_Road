@@ -63,10 +63,24 @@ public class HitBox {
      * @param personnage
      * @return un boolean pour savoir si il y a une collision.
      */
-    public boolean collision(final Personnage personnage) {
-        return this.x < personnage.getX() + personnage.getLongueur()
-                && this.x + this.longueur > personnage.getX()
-                && this.y < personnage.getY() + personnage.getHauteur()
-                && this.y + this.hauteur > personnage.getY();
+    public boolean collision(final Personnage personnage, final int direction) {
+        int newX = 0; 
+        int newY = 0; 
+        switch (direction) {
+            case 1 : newX = personnage.getAvancementX(); //Right.
+                break; 
+            case 2 : newX = -personnage.getAvancementX(); //Left.
+                break; 
+            case 3 : newY = -personnage.getAvancementY(); 
+                break; 
+            default : newY = personnage.getAvancementY(); 
+                break; 
+        }
+        
+        return this.x < personnage.getX() + newX + personnage.getLongueur()
+                && this.x + this.longueur > personnage.getX() + newX
+                && this.y < personnage.getY() + personnage.getHauteur() + newY
+                && this.y + this.hauteur > personnage.getY() + newY;
+       
     }
 }

@@ -79,7 +79,6 @@ public class PanelMenu extends AbstractVue {
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
         this.dessinerTitre(g);
-        this.verifierHitBox(g);
     }
 
     /**

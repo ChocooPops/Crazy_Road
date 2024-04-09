@@ -30,6 +30,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
     public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.personnage = Personnage.getPersonnage();
+        this.personnage.setListHitbox(this.listeTerrain);
     }
 
     public ListeTerrain getListeTerrain() {
@@ -69,13 +70,6 @@ public abstract class AbstractVue extends JPanel implements Observer {
                             getListeSize() - i - 1);
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(),
                     terrain.getLongueur(), terrain.getHauteur(), this);
-            if (terrain.getType().equals("Champ")) {
-                for (HitBox hitBox : terrain.getHitBoxes()) {
-                    g.setColor(Color.RED);
-                    g.drawRect(hitBox.getX(), hitBox.getY(),
-                            hitBox.getLongueur(), hitBox.getHauteur());
-                }
-            }
         }
     }
 
@@ -92,37 +86,14 @@ public abstract class AbstractVue extends JPanel implements Observer {
                     g.drawImage(vec.getImage().getImage(), vec.getX(), vec.getY(),
                             vec.getLongueur(), vec.getHauteur(), this);
                 }
-            }
-        }
-    }
-
-    /**
-     *
-     * Methode pour verifier les collisions si elles sont pénétrées.
-     * @return un boolean pour savoir si il y a une collision.
-     */
-    public boolean verifierHitBox(final Graphics g) {
-        for (Terrain terrain : this.getListeTerrain().getListeTerrain()) {
-            if (terrain.getType().equals("Champ")) {
+            } else {
                 for (HitBox hitBox : terrain.getHitBoxes()) {
-                    if (hitBox.collision(personnage)) {
-                        int direction = personnage.getDirection();
-
-                        if (direction == 1) {
-                            personnage.setX(hitBox.getX() + hitBox.getLongueur());
-                        } else if (direction == 2) {
-                            personnage.setY(hitBox.getY() + hitBox.getHauteur() + 4);
-                        } else if (direction == 3) {
-                            personnage.setY(hitBox.getY() - hitBox.getHauteur() - 4);
-                        } else if (direction == 4) {
-                            personnage.setX(hitBox.getX() - hitBox.getLongueur());
-                        }
-                        return true;
-                    }
+                    g.setColor(Color.RED);
+                    g.drawRect(hitBox.getX(), hitBox.getY(),
+                            hitBox.getLongueur(), hitBox.getHauteur());
                 }
             }
         }
-        return false;
     }
 
     /**
