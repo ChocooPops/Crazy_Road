@@ -58,11 +58,14 @@ public final class Personnage {
         return this.image;
     }
     
-    public void setGameOver( ) {
-        if (jumpMort){
+    /**
+     * Met à jour la position du personnage pour l'animation de mort.
+    */
+    public void setGameOver() {
+        if (jumpMort) {
             this.y -= gravity;
             gravity--;
-        }else {
+        } else {
             this.y += gravity;
             gravity++;
         }
