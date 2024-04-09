@@ -2,6 +2,7 @@ package view;
 
 import controller.ControllerPersonnage;
 import java.awt.Graphics;
+import model.AnimationMort;
 import model.Terrain.ListeTerrain;
 import model.Titre;
 
@@ -20,6 +21,8 @@ public class PanelJeu extends AbstractVue {
         this.titre = new Titre();
         this.setTimerVoiture(); 
         new ControllerPersonnage().controller(this); 
+        
+        new AnimationMort();
     }
     
     @Override

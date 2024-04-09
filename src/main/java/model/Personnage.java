@@ -16,6 +16,9 @@ public final class Personnage {
     private static Personnage personnage;
     private boolean keyIsPressed;
     private int direction;
+    
+    private int gravity = 20;
+    private boolean jumpMort = true;
 
     private Personnage() {
         this.keyIsPressed = false;
@@ -45,8 +48,28 @@ public final class Personnage {
     public void setDirection(final int direction) {
         this.direction = direction;
     }
+    public void setImage(final ImageIcon newImage) {
+        this.image = newImage;
+    }
+    public void setJumpMort(final boolean jumpMort) {
+        this.jumpMort = jumpMort;
+    }
     public ImageIcon getImage() {
         return this.image;
+    }
+    
+    public void setGameOver( ) {
+        if (jumpMort){
+            this.y -= gravity;
+            gravity--;
+        }else {
+            this.y += gravity;
+            gravity++;
+        }
+        
+        if (gravity == 0) {
+            jumpMort = false;
+        }
     }
 
     /**
