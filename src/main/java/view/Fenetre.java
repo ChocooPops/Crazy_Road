@@ -34,7 +34,7 @@ public final class Fenetre extends JFrame {
     *
     * Singleton de la variable static Fenetre. 
     */
-    public static Fenetre getFenetre() {
+    public static synchronized Fenetre getFenetre() {
         if (Fenetre.fenetre == null) {
             Fenetre.fenetre = new Fenetre(); 
             Fenetre.fenetre.setTitle("Crazy Road");
