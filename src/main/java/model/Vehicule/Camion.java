@@ -65,6 +65,6 @@ public final class Camion extends Vehicule {
         return this.getX() < personnage.getX() + newX + personnage.getLongueur()
                 && this.getX() + this.getLongueur() > personnage.getX() + newX
                 && this.getY() + newVecY < personnage.getY() + personnage.getHauteur() + newY
-                && this.getY() - newVecY + this.getHauteur() > personnage.getY() + newY;
+                && this.getY() + newVecY > personnage.getY() + newY;
     }
 }
