@@ -138,9 +138,9 @@ public abstract class Vehicule {
      * @return 
     */
     public boolean collision(final Personnage personnage) {
-        int newX = 0; 
+        int newX = Math.round(5 * DimensionFacteur.getFacteur()); 
         int newY = 0; 
-        return this.x < personnage.getX() + newX + personnage.getLongueur()
+        return this.x < personnage.getX() + -(newX * 2) + personnage.getLongueur()
                 && this.x + this.longueur > personnage.getX() + newX
                 && this.y < personnage.getY() + personnage.getHauteur() + newY
                 && this.y + this.hauteur > personnage.getY() + newY;

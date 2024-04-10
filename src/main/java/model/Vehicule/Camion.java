@@ -59,10 +59,10 @@ public final class Camion extends Vehicule {
      */
     @Override
     public boolean collision(final Personnage personnage) {
-        int newX = 0; 
+        int newX = Math.round(5 * DimensionFacteur.getFacteur()); 
         int newY = 0; 
         int newVecY = Math.round(21 * DimensionFacteur.getFacteur());
-        return this.getX() < personnage.getX() + newX + personnage.getLongueur()
+        return this.getX() < personnage.getX() + -(newX * 2) + personnage.getLongueur()
                 && this.getX() + this.getLongueur() > personnage.getX() + newX
                 && this.getY() + newVecY < personnage.getY() + personnage.getHauteur() + newY
                 && this.getY() + newVecY > personnage.getY() + newY;
