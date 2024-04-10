@@ -8,8 +8,10 @@ import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
 import model.DefilementVoiture;
 import model.Vehicule.Vehicule;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Font;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -133,6 +135,9 @@ public abstract class AbstractVue extends JPanel implements Observer {
                 this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this);
     }
 
+    /**
+     * Methode pour dessiner le score sur l'écran.
+     */
     public void dessinerScore(final Graphics g) {
         g.setColor(Color.black);
         g.setFont(new Font("impact", Font.BOLD, 20));
