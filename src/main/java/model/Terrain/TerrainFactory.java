@@ -1,11 +1,10 @@
 package model.Terrain;
 
 import java.util.Random;
-import javax.swing.ImageIcon;
 
 /**
- *
- * @author ChocoPops
+ * Classe TerrainFactory.
+ * Génére le terrain souhaité.
  */
 public class TerrainFactory {
     
@@ -20,20 +19,18 @@ public class TerrainFactory {
     
     /**
     * Obtenir un terrain aleatoire.
+    * @return 
     */
     public Terrain creationTerrain() {
-        Terrain terrain = null; 
+        Terrain terrain; 
         if (TerrainFactory.nbTerrainCreate < 3) {
-            terrain = new Champ(); 
-            terrain.setImage(new ImageIcon("src/main/resources/terrain/terrain1.png"));
+            terrain = new Champ(true); 
         } else {
             int nb = new Random().nextInt(10); 
             if (nb >= 6) {
-                terrain = new Champ(); 
-                terrain.setImage(new ImageIcon(setImageChamp()));
+                terrain = new Champ(false); 
             } else {
-                terrain = new Route(); 
-                terrain.setImage(new ImageIcon("src/main/resources/terrain/route.png"));
+                terrain = new Route();
             }
         }
         TerrainFactory.nbTerrainCreate++; 
@@ -41,25 +38,9 @@ public class TerrainFactory {
     }
     
     /**
-    * Choisit une image du terrain parmis six images.
+    * Reinitialisation du nombre de Terrain.
     */
-    public String setImageChamp() {
-        int nb = new Random().nextInt(6); 
-        String src = ""; 
-        switch (nb) {
-            case 0 : src = "src/main/resources/terrain/terrain1.png"; 
-                break; 
-            case 1 : src = "src/main/resources/terrain/terrain2.png"; 
-                break; 
-            case 2 : src = "src/main/resources/terrain/terrain3.png"; 
-                break; 
-            case 3 : src = "src/main/resources/terrain/terrain4.png"; 
-                break; 
-            case 4 : src = "src/main/resources/terrain/terrain5.png"; 
-                break;
-            default : src = "src/main/resources/terrain/terrain6.png"; 
-                break; 
-        }
-        return src; 
+    public static void reinitialisationCount() {
+        TerrainFactory.nbTerrainCreate = 0; 
     }
 }
