@@ -25,6 +25,8 @@ public final class Personnage {
     private int x;
     private int y;
     private int direction;
+    private int score = 0;
+    private int verifScore = 0;
 
     private ListeTerrain listeTerrain; 
     private int avancementX; 
@@ -128,6 +130,10 @@ public final class Personnage {
         this.directionX = op; 
     }
     
+    public int getScore() {
+        return this.score;
+    }
+
     /**
      * Recupérer le personnage s'il est déjà créer ou le creer.
      * @return 
@@ -185,6 +191,11 @@ public final class Personnage {
         if (this.checkCollisionArbre(3)) {
             if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
                 this.keyHaut = true; 
+
+                verifScore++;
+                if (verifScore > score) {
+                    score = verifScore;
+                }
             }
         }
     }
@@ -197,6 +208,8 @@ public final class Personnage {
             if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getHauteurFenetre()) {
                 this.keyBas = true; 
+
+                verifScore--;
             }
         }
     }

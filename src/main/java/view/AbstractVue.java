@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import model.Thread.AbstractThread;
 import model.Thread.ActionPersonnage;
 import model.Thread.DefilementMaps;
+import java.awt.Font;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -121,6 +122,15 @@ public abstract class AbstractVue extends JPanel implements Observer {
         g.drawImage(this.getPersonnage().getImage().getImage(),
                 this.getPersonnage().getX(), this.getPersonnage().getY(),
                 this.getPersonnage().getLongueur(), this.getPersonnage().getHauteur(), this);
+    }
+
+    /**
+     * Methode pour dessiner le score sur l'écran.
+     */
+    public void dessinerScore(final Graphics g) {
+        g.setColor(Color.black);
+        g.setFont(new Font("impact", Font.BOLD, 20));
+        g.drawString("Score : " + this.personnage.getScore(), 10, 20);
     }
 }
 

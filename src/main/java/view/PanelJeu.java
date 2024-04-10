@@ -44,5 +44,6 @@ public class PanelJeu extends AbstractVue {
         this.dessinerTerrain(g);
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
+        this.dessinerScore(g);
     }
 }
