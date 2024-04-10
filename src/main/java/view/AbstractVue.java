@@ -9,6 +9,7 @@ import model.Thread.DefilementVehicule;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Color;
 import model.Thread.AbstractThread;
 import model.Thread.ActionPersonnage;
 import model.Thread.DefilementMaps;
