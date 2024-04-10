@@ -9,6 +9,7 @@ public abstract class AbstractController {
 
     /**
      * Fonction pour controller.
+     * @param panel
      */
     public abstract void controller(AbstractVue panel);
 

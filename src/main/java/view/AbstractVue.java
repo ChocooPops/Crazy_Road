@@ -5,7 +5,7 @@ import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
-import model.Thread.DefilementVoiture;
+import model.Thread.DefilementVehicule;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -19,7 +19,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     private ListeTerrain listeTerrain;
     private Personnage personnage;
-    private DefilementVoiture timerVoiture;
+    private DefilementVehicule timerVoiture;
 
     /**
      * Constructeur de la classe AbstractVue.
@@ -47,7 +47,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
         return this.personnage;
     }
 
-    public DefilementVoiture getTimerVoiture() {
+    public DefilementVehicule getTimerVoiture() {
         return this.timerVoiture;
     }
 
@@ -55,7 +55,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
      * Instancier un nouveau timer.
      */
     public void setTimerVoiture() {
-        this.timerVoiture = new DefilementVoiture(this);
+        this.timerVoiture = new DefilementVehicule(this);
     }
 
     /**

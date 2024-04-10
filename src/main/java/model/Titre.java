@@ -3,8 +3,8 @@ package model;
 import javax.swing.ImageIcon;
 
 /**
- *
  * Classe Titre.
+ * Représente l'image du titre du jeu.
  */
 public class Titre {
     
@@ -16,7 +16,6 @@ public class Titre {
     private float facteur = DimensionFacteur.getFacteur(); 
 
     /**
-    *
     * Constructeur de la classe Titre. 
     * Instancie l'image, la taille et les coordonées de l'image.
     */

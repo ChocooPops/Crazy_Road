@@ -7,8 +7,7 @@ import model.DimensionFacteur;
 import model.Vehicule.Vehicule;
 
 /**
- *
- * @author ChocoPops
+ * Classe abstraite du Terrain.
  */
 public abstract class Terrain {
     private int hauteur; 
@@ -20,8 +19,8 @@ public abstract class Terrain {
     private int vitesse = DimensionFacteur.getVitesseMap();
     
     /**
-    *
     * Constructeur de la classe Terrain.
+    * Chaque Terrain est situé à l'abscysse 0.
     */
     public Terrain() {
         this.x = 0; 
@@ -48,6 +47,7 @@ public abstract class Terrain {
     public String getType() {
         return this.type; 
     }
+    
     /**
     * Initialise l'image du terrain.Appel des methodes pour initialiser la taille.
      * @param image
@@ -61,6 +61,7 @@ public abstract class Terrain {
     public void setType(final String type) {
         this.type = type; 
     }
+    
     /**
     * Initialise la hauteur selon la taille du terrain.
     */
@@ -85,6 +86,7 @@ public abstract class Terrain {
     public void setDescenteTerrain() {
         this.y += this.vitesse; 
     }
+    
     /**
      *
      * Methode override par les classes filles.
@@ -95,6 +97,7 @@ public abstract class Terrain {
 
     /**
     * Methode override par les classes filles.
+     * @param y
     */
     public void addVehicule(final int y) {
     }; 

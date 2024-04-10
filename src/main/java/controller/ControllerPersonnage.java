@@ -7,7 +7,7 @@ import view.AbstractVue;
 
 /**
  *
- * @author p2204658
+ * Classe Controller qui control les deplacements du perso.
  */
 public class ControllerPersonnage extends AbstractController {
 

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import model.Terrain.HitBox;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
+import model.Vehicule.Vehicule;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class Personnage {
     private ImageIcon imagePressed;
     private int x;
     private int y;
-    private ListeTerrain listeHitbox; 
+    private ListeTerrain listeTerrain; 
     private int avancementX; 
     private int avancementY;
     private boolean keyDroite; 
@@ -60,7 +61,7 @@ public final class Personnage {
         this.y = y;
     }
     public void setListHitbox(final ListeTerrain liste) {
-        this.listeHitbox = liste; 
+        this.listeTerrain = liste; 
     }
     public ImageIcon getImage() {
         return this.image;
@@ -75,8 +76,8 @@ public final class Personnage {
         this.directionX = op; 
     }
     /**
-     *
      * Recupérer le personnage s'il est déjà créer ou le creer.
+     * @return 
      */
     public static synchronized Personnage getPersonnage() {
         if (Personnage.personnage == null) {
@@ -94,10 +95,10 @@ public final class Personnage {
     }
 
     /**
-     *
+     * KeyRight => deplacement direction droite.
      */
     public void keyRight() {
-        if (this.checkCollision(1)) {
+        if (this.checkCollisionArbre(1)) {
             if (this.x + Math.round(18.4 * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getLongueurFenetre()) {
                 this.keyDroite = true; 
@@ -106,10 +107,10 @@ public final class Personnage {
     }
 
     /**
-     *
+     * KeyLeft => deplacement direction gauche.
      */
     public void keyLeft() {
-        if (this.checkCollision(2)) {
+        if (this.checkCollisionArbre(2)) {
             if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
                 this.keyGauche = true; 
             }
@@ -117,10 +118,10 @@ public final class Personnage {
     }
 
     /**
-     *
+     * KeyUp => deplacement direction haut.
      */
     public void keyUp() {
-        if (this.checkCollision(3)) {
+        if (this.checkCollisionArbre(3)) {
             if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
                 this.keyHaut = true; 
             }
@@ -128,10 +129,10 @@ public final class Personnage {
     }
 
     /**
-     *
+     * KeyDown => deplacement direction bas.
      */
     public void keyDown() {
-        if (this.checkCollision(4)) {
+        if (this.checkCollisionArbre(4)) {
             if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getHauteurFenetre()) {
                 this.keyBas = true; 
@@ -162,18 +163,40 @@ public final class Personnage {
     }
     
     /**
-    * Check si le personnage rencontre la collision d'un arbre. 
+    * Check si le personnage rencontre la collision d'un arbre.
+     * @param direction
+     * @return 
     */
-    public boolean checkCollision(final int direction) {
+    public boolean checkCollisionArbre(final int direction) {
         boolean op = true; 
-        if (this.listeHitbox != null) {
-            for (Terrain terrain : this.listeHitbox.getListeTerrain()) {
+        if (this.listeTerrain != null) {
+            for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
                 if (terrain.getType().equals("Champ")) {
                     for (HitBox hitBox : terrain.getHitBoxes()) {
-                      if (hitBox.collision(this, direction)) {
-                          op = false; 
-                      }
-                  }  
+                        if (hitBox.collision(this, direction)) {
+                            op = false; 
+                        }
+                    }  
+                }
+            }
+        }
+        return op; 
+    }
+    
+    /**
+    * Check si le personnage rencontre la collision d'un véhicule.
+     * @return 
+    */
+    public boolean checkCollisionVehicule() {
+        boolean op = true; 
+        if (this.listeTerrain != null) {
+            for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
+                if (terrain.getType().equals("Route")) {
+                    for (Vehicule vec : terrain.getListeVehicule()) {
+                        if (vec.collision(this)) {
+                            op = false;
+                        }
+                    }  
                 }
             }
         }
@@ -207,18 +230,18 @@ public final class Personnage {
     }
     
     /**
-    * Effectuer un fli horizontale sur l'image. 
+    * Effectuer un flip horizontale sur l'image. 
     */
     public void flipImageIconHorizontally() {
         this.directionX = true; 
-        Image image = this.image.getImage();
-        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), 
-                image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Image newIcon = this.image.getImage();
+        BufferedImage bufferedImage = new BufferedImage(newIcon.getWidth(null), 
+                newIcon.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) bufferedImage.getGraphics();
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        tx.translate(-image.getWidth(null), 0);
+        tx.translate(-newIcon.getWidth(null), 0);
         g2d.setTransform(tx);
-        g2d.drawImage(image, 0, 0, null);
+        g2d.drawImage(newIcon, 0, 0, null);
         g2d.dispose();
 
         this.image = new ImageIcon(bufferedImage);

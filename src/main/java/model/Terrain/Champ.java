@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 import model.DimensionFacteur;
 
 /**
- *
- * @author ChocoPops
+ * Classe Champ.
+ * Herite de la classe Terrain.
  */
 public class Champ extends Terrain {
 

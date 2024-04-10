@@ -4,8 +4,9 @@ import model.Observable;
 import view.AbstractVue;
 
 /**
- *
- * @author ChocoPops
+ * Classe Abstraite des Threads.
+ * Hérité de l'observable.
+ * Implement l'interface Runnable pour créer un thread de cette classe.
  */
 public abstract class AbstractThread extends Observable implements Runnable {
 
@@ -15,6 +16,7 @@ public abstract class AbstractThread extends Observable implements Runnable {
     
     /**
     * Constructeur de la classe AbstractThread.
+     * @param panel
     */
     public AbstractThread(final AbstractVue panel) {
         this.setPanel(panel);
