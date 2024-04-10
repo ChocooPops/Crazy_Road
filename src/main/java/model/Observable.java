@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author ChocoPops
+ * Classe Observable.
  */
 public abstract class Observable {
     private List<Observer> observers = new ArrayList<>(); 
@@ -30,9 +29,9 @@ public abstract class Observable {
     }
     
     /**
- *
- * Si l'objet est changé, notifie tous les observers.
- */
+    *
+    * Si l'objet est changé, notifie tous les observers.
+    */
     public void notifyAllObservers() {
         for (Observer observer : observers) {
             observer.update();

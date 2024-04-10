@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.DefilementVoiture;
+import model.Thread.DefilementVehicule;
 import model.Titre;
 
 /**
@@ -26,7 +26,7 @@ public class PanelMenu extends AbstractVue {
 
     private JButton btJouer;
     private Titre titre;
-    private DefilementVoiture timer;
+    private DefilementVehicule timer;
 
     /**
      * Constructeur de la classe PanelMenu.
@@ -75,11 +75,11 @@ public class PanelMenu extends AbstractVue {
      */
     @Override
     public void paintComponent(final Graphics g) {
+        super.paintComponent(g);
         this.dessinerTerrain(g);
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
         this.dessinerTitre(g);
-        this.verifierHitBox(g);
     }
 
     /**

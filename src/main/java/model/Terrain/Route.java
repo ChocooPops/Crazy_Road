@@ -10,13 +10,13 @@ import model.Vehicule.VehiculeFactory;
 
 
 /**
- *
- * @author ChocoPops
+ * Classe Route.
+ * Hérite de la classe Terrain.
  */
 public class Route extends Terrain {
     private List<Vehicule> listeVehicule = new ArrayList<>(); 
     
-     /**
+    /**
     * Instancie le type de terrain "Route" et son image.
     */
     public Route() {
@@ -42,7 +42,7 @@ public class Route extends Terrain {
             longueurOldVec = DimensionFacteur.getLongueurFenetre(); 
         }
         for (int i = 0; i < nbVehicule; i++) {
-            int vehiculeX = 0; 
+            int vehiculeX; 
             if (direction > 0) {
                 vehiculeX = longueurOldVec + this.getRandomX();
             } else {
@@ -56,7 +56,7 @@ public class Route extends Terrain {
     }
     
     private int getRandomVehicule() {
-        int vec = 0; 
+        int vec; 
         int nb = new Random().nextInt(10); 
         if (nb >= 4) {
             vec = 1; 
@@ -69,7 +69,7 @@ public class Route extends Terrain {
     }
     private int getRandomDirection() {
         int nb = new Random().nextInt(2); 
-        int sens = 0; 
+        int sens; 
         if (nb == 0)  {
             sens = 1; 
         } else {
@@ -81,6 +81,7 @@ public class Route extends Terrain {
     /**
     * Methode qui assure le deplacement des voitures dans la liste.
     */
+    @Override
     public void deplacerVoiture() {
         for (Vehicule vec : this.listeVehicule) {
             if (vec.getDirection() < 0 && vec.getX() + vec.getLongueur() < -40) {
@@ -107,5 +108,13 @@ public class Route extends Terrain {
     @Override
     public ArrayList<HitBox> getHitBoxes() {
         return null;
+    }
+    
+    @Override
+    public void setDescenteAllElementTerrain() {
+        this.setDescenteTerrain();
+        for (Vehicule vec : this.listeVehicule) {
+            vec.setDescenteVehicule(this.getVitesse());
+        }
     }
 }

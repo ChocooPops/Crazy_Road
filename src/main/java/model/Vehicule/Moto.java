@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
  *
  * @author p2203115
  */
-public class Moto extends Vehicule {
+public final class Moto extends Vehicule {
     
     
     /**
@@ -21,14 +21,16 @@ public class Moto extends Vehicule {
         super(x, y, direction);
         this.setRandomImage();
         this.setVitesse(6);
+        this.setType("Moto");
     }
         
     /**
     * Mettre une couleur aléatoire au véhicule.
     */
+    @Override
     public void setRandomImage() {
         int nb = new Random().nextInt(2); 
-        String src = ""; 
+        String src; 
         switch (nb) {
             case 0 : src = "src/main/resources/vehicule/moto.png"; 
                 break; 
@@ -37,7 +39,6 @@ public class Moto extends Vehicule {
             default : src = "src/main/resources/vehicule/moto.png"; 
                 break; 
         }
-        
         this.setImage(new ImageIcon(src)); 
     }
 }
