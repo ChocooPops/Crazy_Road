@@ -1,6 +1,5 @@
 package model.Thread;
 
-import model.Personnage;
 import model.Terrain.Terrain;
 import view.AbstractVue;
 
@@ -25,12 +24,9 @@ public class DefilementVehicule extends AbstractThread {
     */
     @Override
     public void deroulement() {
-        Personnage.getPersonnage().actionBouton();
         for (Terrain terrain : this.getPanel().getListeTerrain().getListeTerrain()) {
             terrain.deplacerVoiture();
         }
-        Personnage.getPersonnage().checkCollisionVehicule(); 
         notifyAllObservers(); 
-        
     }
 }

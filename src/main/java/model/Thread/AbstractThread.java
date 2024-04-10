@@ -1,6 +1,7 @@
 package model.Thread;
 
 import model.Observable;
+import model.Personnage;
 import view.AbstractVue;
 
 /**
@@ -13,6 +14,7 @@ public abstract class AbstractThread extends Observable implements Runnable {
     private Thread thread; 
     private AbstractVue panel; 
     private boolean activation; 
+    private Personnage personnage; 
     
     /**
     * Constructeur de la classe AbstractThread.
@@ -23,6 +25,7 @@ public abstract class AbstractThread extends Observable implements Runnable {
         this.setThead(this);
         this.setActivation(true);
         this.getThread().start(); 
+        this.personnage = Personnage.getPersonnage(); 
     }
     
     public AbstractVue getPanel() {
@@ -43,6 +46,9 @@ public abstract class AbstractThread extends Observable implements Runnable {
     }
     public void setActivation(final boolean activation) {
         this.activation = activation; 
+    }
+    public Personnage getPersonnage() {
+        return this.personnage; 
     }
     
     /**

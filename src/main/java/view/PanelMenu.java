@@ -37,7 +37,7 @@ public class PanelMenu extends AbstractVue {
         this.setListeTerrain(new ListeTerrain());
         this.setLayout(new BorderLayout());
         this.setPanelBouton();
-        this.setTimerVoiture();
+        this.setThreadVehicule();
         new EcouteurJouer(this);
     }
 

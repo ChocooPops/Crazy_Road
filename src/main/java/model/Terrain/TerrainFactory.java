@@ -36,4 +36,11 @@ public class TerrainFactory {
         TerrainFactory.nbTerrainCreate++; 
         return terrain; 
     }
+    
+    /**
+    * Reinitialisation du nombre de Terrain.
+    */
+    public static void reinitialisationCount() {
+        TerrainFactory.nbTerrainCreate = 0; 
+    }
 }

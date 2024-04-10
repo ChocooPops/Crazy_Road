@@ -11,8 +11,7 @@ import model.Terrain.Terrain;
 import model.Vehicule.Vehicule;
 
 /**
- *
- * @author ChocoPops
+ * Classe du personnage.
  */
 public final class Personnage {
 
@@ -38,12 +37,14 @@ public final class Personnage {
     
     private int gravity; 
     private boolean jumpMort;
+    private boolean gameOver; 
     
     /**
      * Constructeur de la classe Personnage.
      */
     public Personnage() {
         this.setGravity();
+        this.jumpMort = true; 
         this.imageReleased = new ImageIcon("src/main/resources/personnage/poule.png"); 
         this.imagePressed = new ImageIcon("src/main/resources/personnage/poule2.png"); 
         this.imageMort = new ImageIcon("src/main/resources/personnage/pouleMorte.png"); 
@@ -62,6 +63,9 @@ public final class Personnage {
     }
     public int getY() {
         return this.y;
+    }
+    public boolean isGameOver() {
+        return this.gameOver; 
     }
     public void setX(final int x) {
         this.x = x;
@@ -100,16 +104,18 @@ public final class Personnage {
      * Met à jour la position du personnage pour l'animation de mort.
     */
     public void setGameOver() {
-        if (jumpMort) {
+        if (this.gameOver) {
+            if (jumpMort) {
             this.y -= gravity;
             gravity--;
-        } else {
-            this.y += gravity;
-            gravity++;
-        }
-        if (gravity == 0) {
-            jumpMort = false;
-        }    
+            } else {
+                this.y += gravity;
+                gravity++;
+            }
+            if (gravity == 0) {
+                jumpMort = false;
+            }  
+        }  
     }
 
     public int getAvancementX() {
@@ -140,6 +146,13 @@ public final class Personnage {
             Personnage.personnage.hauteur = Math.round(facteur * hauteur);
         }
         return Personnage.personnage;
+    }
+    
+    /**
+    * Reinitialise le personnage après le game over.
+    */
+    public void reinitilisation() {
+        Personnage.personnage = null;
     }
 
     /**
@@ -233,24 +246,24 @@ public final class Personnage {
     
     /**
     * Check si le personnage rencontre la collision d'un véhicule.
-     * @return 
     */
-    public boolean checkCollisionVehicule() {
-        boolean op = true; 
-        if (this.listeTerrain != null) {
-            for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
-                if (terrain.getType().equals("Route")) {
-                    for (Vehicule vec : terrain.getListeVehicule()) {
-                        if (vec.collision(this)) {
-                            op = false;
-                        }
-                    }  
+    public void checkCollisionVehicule() {
+        if (!this.gameOver) {
+            if (this.listeTerrain != null) {
+                for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
+                    if (terrain.getType().equals("Route")) {
+                        for (Vehicule vec : terrain.getListeVehicule()) {
+                            if (vec.collision(this)) {
+                                this.image = this.imageMort; 
+                                this.gameOver = true;  
+                            }
+                        }  
+                    }
                 }
             }
         }
-        return op; 
     }
-    
+
     /**
      * Fait descendre le personnage.
      */
@@ -277,6 +290,18 @@ public final class Personnage {
         }
     }
     
+    /**
+    * Vérifie lorsque le personnage est en dessous de l'écran.
+     * @return 
+    */
+    public boolean horsEcran() {
+        boolean op = false; 
+        int marge = Math.round(200 * DimensionFacteur.getFacteur()); 
+        if (this.y > DimensionFacteur.getHauteurFenetre() + marge) {
+            op = true; 
+        }
+        return op; 
+    }
     /**
     * Effectuer un flip horizontale sur l'image. 
     */

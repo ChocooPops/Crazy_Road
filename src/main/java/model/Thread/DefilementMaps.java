@@ -1,6 +1,5 @@
 package model.Thread;
 
-import model.Personnage;
 import view.AbstractVue;
 
 /**
@@ -21,6 +20,6 @@ public class DefilementMaps extends AbstractThread {
     @Override
     public void deroulement() {
         this.getPanel().getListeTerrain().setDescenteAllElements();
-        Personnage.getPersonnage().setDescente();
+        this.getPersonnage().setDescente();
     }
 }

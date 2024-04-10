@@ -9,6 +9,9 @@ import model.Thread.DefilementVehicule;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import model.Thread.AbstractThread;
+import model.Thread.ActionPersonnage;
+import model.Thread.DefilementMaps;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -19,12 +22,14 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     private ListeTerrain listeTerrain;
     private Personnage personnage;
-    private DefilementVehicule timerVoiture;
-
+    private AbstractThread threadVehicule;
+    private AbstractThread threadMaps;
+    private AbstractThread threadActionPerso;
+    
     /**
-     * Constructeur de la classe AbstractVue.
-     * Initialise la taille du panel.
-     */
+    * Constructeur de la classe AbstractVue.
+    * Initialise la taille du panel.
+    */
     public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.personnage = Personnage.getPersonnage();
@@ -47,20 +52,39 @@ public abstract class AbstractVue extends JPanel implements Observer {
         return this.personnage;
     }
 
-    public DefilementVehicule getTimerVoiture() {
-        return this.timerVoiture;
+    public AbstractThread getThreadVehicule() {
+        return this.threadVehicule;
+    }
+    public AbstractThread getThreadActionPerso() {
+        return this.threadActionPerso;
+    }
+    public AbstractThread getThreadMaps() {
+        return this.threadMaps;
     }
 
     /**
-     * Instancier un nouveau timer.
-     */
-    public void setTimerVoiture() {
-        this.timerVoiture = new DefilementVehicule(this);
+    * Instancier le thread responsable du defilement des véhicules.
+    */
+    public void setThreadVehicule() {
+        this.threadVehicule = new DefilementVehicule(this); 
     }
-
     /**
-     * Dessiner les terrains.
-     */
+    * Instancier le thread responsable des actions du personnages.
+    */
+    public void setThreadActionPerso() {
+        this.threadActionPerso = new ActionPersonnage(this, this.getThreadMaps()); 
+    }
+    /**
+    * Instancier le thread responsable du defilement de la Map.
+    */
+    public void setThreadMaps() {
+        this.threadMaps = new DefilementMaps(this); 
+    }
+    
+    /**
+    * Dessiner les terrains.
+    * @param g
+    */
     public void dessinerTerrain(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
             Terrain terrain = this.getListeTerrain().
@@ -72,8 +96,9 @@ public abstract class AbstractVue extends JPanel implements Observer {
     }
 
     /**
-     * Dessiner les véhicules.
-     */
+    * Dessiner les véhicules.
+     * @param g
+    */
     public void dessinerVehicule(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
             Terrain terrain = this.getListeTerrain().
@@ -89,8 +114,9 @@ public abstract class AbstractVue extends JPanel implements Observer {
     }
 
     /**
-     * Dessiner le personnage.
-     */
+    * Dessiner le personnage.
+     * @param g
+    */
     public void dessinerPersonnage(final Graphics g) {
         g.drawImage(this.getPersonnage().getImage().getImage(),
                 this.getPersonnage().getX(), this.getPersonnage().getY(),
