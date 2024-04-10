@@ -3,14 +3,15 @@ package view;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Personnage;
-import model.Terrain.HitBox;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
-import model.DefilementVoiture;
+import model.Thread.DefilementVehicule;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
-import java.awt.Color;
 import java.awt.Graphics;
+import model.Thread.AbstractThread;
+import model.Thread.ActionPersonnage;
+import model.Thread.DefilementMaps;
 import java.awt.Font;
 
 /**
@@ -22,15 +23,18 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     private ListeTerrain listeTerrain;
     private Personnage personnage;
-    private DefilementVoiture timerVoiture;
-
+    private AbstractThread threadVehicule;
+    private AbstractThread threadMaps;
+    private AbstractThread threadActionPerso;
+    
     /**
-     * Constructeur de la classe AbstractVue.
-     * Initialise la taille du panel.
-     */
+    * Constructeur de la classe AbstractVue.
+    * Initialise la taille du panel.
+    */
     public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.personnage = Personnage.getPersonnage();
+        this.personnage.setListHitbox(this.listeTerrain);
     }
 
     public ListeTerrain getListeTerrain() {
@@ -49,20 +53,39 @@ public abstract class AbstractVue extends JPanel implements Observer {
         return this.personnage;
     }
 
-    public DefilementVoiture getTimerVoiture() {
-        return this.timerVoiture;
+    public AbstractThread getThreadVehicule() {
+        return this.threadVehicule;
+    }
+    public AbstractThread getThreadActionPerso() {
+        return this.threadActionPerso;
+    }
+    public AbstractThread getThreadMaps() {
+        return this.threadMaps;
     }
 
     /**
-     * Instancier un nouveau timer.
-     */
-    public void setTimerVoiture() {
-        this.timerVoiture = new DefilementVoiture(this);
+    * Instancier le thread responsable du defilement des véhicules.
+    */
+    public void setThreadVehicule() {
+        this.threadVehicule = new DefilementVehicule(this); 
     }
-
     /**
-     * Dessiner les terrains.
-     */
+    * Instancier le thread responsable des actions du personnages.
+    */
+    public void setThreadActionPerso() {
+        this.threadActionPerso = new ActionPersonnage(this, this.getThreadMaps()); 
+    }
+    /**
+    * Instancier le thread responsable du defilement de la Map.
+    */
+    public void setThreadMaps() {
+        this.threadMaps = new DefilementMaps(this); 
+    }
+    
+    /**
+    * Dessiner les terrains.
+    * @param g
+    */
     public void dessinerTerrain(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
             Terrain terrain = this.getListeTerrain().
@@ -70,19 +93,13 @@ public abstract class AbstractVue extends JPanel implements Observer {
                             getListeSize() - i - 1);
             g.drawImage(terrain.getImage().getImage(), terrain.getX(), terrain.getY(),
                     terrain.getLongueur(), terrain.getHauteur(), this);
-            if (terrain.getType().equals("Champ")) {
-                for (HitBox hitBox : terrain.getHitBoxes()) {
-                    g.setColor(Color.RED);
-                    g.drawRect(hitBox.getX(), hitBox.getY(),
-                            hitBox.getLongueur(), hitBox.getHauteur());
-                }
-            }
         }
     }
 
     /**
-     * Dessiner les véhicules.
-     */
+    * Dessiner les véhicules.
+     * @param g
+    */
     public void dessinerVehicule(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
             Terrain terrain = this.getListeTerrain().
@@ -98,37 +115,9 @@ public abstract class AbstractVue extends JPanel implements Observer {
     }
 
     /**
-     *
-     * Methode pour verifier les collisions si elles sont pénétrées.
-     * @return un boolean pour savoir si il y a une collision.
-     */
-    public boolean verifierHitBox(final Graphics g) {
-        for (Terrain terrain : this.getListeTerrain().getListeTerrain()) {
-            if (terrain.getType().equals("Champ")) {
-                for (HitBox hitBox : terrain.getHitBoxes()) {
-                    if (hitBox.collision(personnage)) {
-                        int direction = personnage.getDirection();
-
-                        if (direction == 1) {
-                            personnage.setX(hitBox.getX() + hitBox.getLongueur());
-                        } else if (direction == 2) {
-                            personnage.setY(hitBox.getY() + hitBox.getHauteur() + 4);
-                        } else if (direction == 3) {
-                            personnage.setY(hitBox.getY() - hitBox.getHauteur() - 4);
-                        } else if (direction == 4) {
-                            personnage.setX(hitBox.getX() - hitBox.getLongueur());
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Dessiner le personnage.
-     */
+    * Dessiner le personnage.
+     * @param g
+    */
     public void dessinerPersonnage(final Graphics g) {
         g.drawImage(this.getPersonnage().getImage().getImage(),
                 this.getPersonnage().getX(), this.getPersonnage().getY(),

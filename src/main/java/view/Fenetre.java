@@ -10,8 +10,8 @@ import model.Terrain.ListeTerrain;
 public final class Fenetre extends JFrame {
     
     private AbstractVue panel; 
-    
     private static Fenetre fenetre; 
+    
     /**
     * Constructeur de la classe Fenetre.
     * Initialise les informations importantes de l'ecran.
@@ -21,7 +21,6 @@ public final class Fenetre extends JFrame {
     }
     
     /**
-    *
     * Afficher l'ecran static.  
     */
     public void afficherFenetre() {
@@ -31,8 +30,8 @@ public final class Fenetre extends JFrame {
     }
     
     /**
-    *
     * Singleton de la variable static Fenetre. 
+     * @return 
     */
     public static synchronized Fenetre getFenetre() {
         if (Fenetre.fenetre == null) {
@@ -50,6 +49,7 @@ public final class Fenetre extends JFrame {
     
     /**
     * Changement d'écran vers l'écran jeu. 
+     * @param listeTerrain
     */
     public void setEcranJeu(final ListeTerrain listeTerrain) {
         Fenetre.fenetre.panel = new PanelJeu(listeTerrain); 
@@ -59,5 +59,17 @@ public final class Fenetre extends JFrame {
         Fenetre.fenetre.repaint();
         Fenetre.fenetre.panel.setFocusable(true);
         Fenetre.fenetre.panel.requestFocus();
+    }
+    
+    /**
+    * Changement d'écran vers l'écran menu. 
+    */
+    public void setEcranMenu() {
+        Fenetre.fenetre.panel = new PanelMenu(); 
+        Fenetre.fenetre.getContentPane().removeAll(); 
+        Fenetre.fenetre.getContentPane().add(Fenetre.fenetre.panel); 
+        Fenetre.fenetre.revalidate();
+        Fenetre.fenetre.repaint();
+        Fenetre.fenetre.panel.setFocusable(false);
     }
 }

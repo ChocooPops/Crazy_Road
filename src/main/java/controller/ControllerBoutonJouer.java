@@ -4,15 +4,13 @@ import view.AbstractVue;
 import view.Fenetre;
 
 /**
- *
- * @author ChocoPops
+ * Classe Controller du bouton jouer.
  */
 public class ControllerBoutonJouer extends AbstractController {
 
     @Override
     public void controller(final AbstractVue panel) {
-        panel.getTimerVoiture().stopTimerDefilementVoiture();
+        panel.getThreadVehicule().setActivation(false);
         Fenetre.getFenetre().setEcranJeu(panel.getListeTerrain());
     }
-    
 }

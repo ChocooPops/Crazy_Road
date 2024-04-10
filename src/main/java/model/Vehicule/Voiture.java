@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
  *
  * @author ChocoPops
  */
-public class Voiture extends Vehicule {
+public final class Voiture extends Vehicule {
     
     /**
     * Constructeur de la classe Voiture.
@@ -21,14 +21,16 @@ public class Voiture extends Vehicule {
         super(x, y, direction);
         this.setRandomImage();
         this.setVitesse(4);
+        this.setType("Voiture");
     }
         
-     /**
+    /**
     * Mettre une couleur aléatoire au véhicule.
     */
+    @Override
     public void setRandomImage() {
         int nb = new Random().nextInt(3); 
-        String src = ""; 
+        String src; 
         switch (nb) {
             case 0 : src = "src/main/resources/vehicule/voitureVerte.png"; 
                 break; 

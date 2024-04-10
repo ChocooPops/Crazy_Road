@@ -7,8 +7,7 @@ import model.DimensionFacteur;
 import model.Vehicule.Vehicule;
 
 /**
- *
- * @author ChocoPops
+ * Classe abstraite du Terrain.
  */
 public abstract class Terrain {
     private int hauteur; 
@@ -17,10 +16,11 @@ public abstract class Terrain {
     private int x; 
     private int y; 
     private String type; 
+    private int vitesse = DimensionFacteur.getVitesseMap();
     
     /**
-    *
     * Constructeur de la classe Terrain.
+    * Chaque Terrain est situé à l'abscysse 0.
     */
     public Terrain() {
         this.x = 0; 
@@ -38,13 +38,16 @@ public abstract class Terrain {
     public int getY() {
         return this.y; 
     }
-    
+    public int getVitesse() {
+        return this.vitesse; 
+    }
     public ImageIcon getImage() {
         return this.image; 
     }
     public String getType() {
         return this.type; 
     }
+    
     /**
     * Initialise l'image du terrain.Appel des methodes pour initialiser la taille.
      * @param image
@@ -58,6 +61,7 @@ public abstract class Terrain {
     public void setType(final String type) {
         this.type = type; 
     }
+    
     /**
     * Initialise la hauteur selon la taille du terrain.
     */
@@ -77,6 +81,13 @@ public abstract class Terrain {
     }
 
     /**
+     * Fait descendre le terrain.
+     */
+    public void setDescenteTerrain() {
+        this.y += this.vitesse; 
+    }
+    
+    /**
      *
      * Methode override par les classes filles.
      * @param y
@@ -86,6 +97,7 @@ public abstract class Terrain {
 
     /**
     * Methode override par les classes filles.
+     * @param y
     */
     public void addVehicule(final int y) {
     }; 
@@ -99,8 +111,13 @@ public abstract class Terrain {
     }
 
     /**
-     * Methode override par les classes filles. Pour la liste des hitbox.
-     * @return
+     * Methode override par les classes filles.Pour la liste des hitbox.
+     * @return 
      */
     public abstract ArrayList<HitBox> getHitBoxes();
+    
+    /**
+     * Methode override par les classes filles.Pour la liste des hitbox.
+     */
+    public abstract void setDescenteAllElementTerrain(); 
 }

@@ -3,8 +3,8 @@ package model.Terrain;
 import java.util.Random;
 
 /**
- *
- * @author ChocoPops
+ * Classe TerrainFactory.
+ * Génére le terrain souhaité.
  */
 public class TerrainFactory {
     
@@ -19,9 +19,10 @@ public class TerrainFactory {
     
     /**
     * Obtenir un terrain aleatoire.
+    * @return 
     */
     public Terrain creationTerrain() {
-        Terrain terrain = null; 
+        Terrain terrain; 
         if (TerrainFactory.nbTerrainCreate < 3) {
             terrain = new Champ(true); 
         } else {
@@ -34,5 +35,12 @@ public class TerrainFactory {
         }
         TerrainFactory.nbTerrainCreate++; 
         return terrain; 
+    }
+    
+    /**
+    * Reinitialisation du nombre de Terrain.
+    */
+    public static void reinitialisationCount() {
+        TerrainFactory.nbTerrainCreate = 0; 
     }
 }

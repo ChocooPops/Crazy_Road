@@ -1,25 +1,30 @@
 package model.Vehicule;
 
 /**
- *
- * @author ChocoPops
+ * Classe VehiculeFactory.
+ * S'occupe des créer des vehicules aléatoirement.
  */
 public class VehiculeFactory {
     
     /**
- *
- * Constructeur de la classe.
- */
+    *
+    * Constructeur de la classe.
+    */
     public VehiculeFactory() {
         
     }
     
     /**
-     * Création d'un véhicule aléatoire.
-  */
+    * Création d'un véhicule aléatoire.
+     * @param type
+     * @param x
+     * @param y
+     * @param direction
+     * @return 
+    */
     public Vehicule creationVehicule(final int type, final int x, 
             final int y, final int direction) {
-        Vehicule vehicule = null;
+        Vehicule vehicule;
         switch (type) {
             case 1 : vehicule = new Voiture(x, y, direction); 
                 break; 
