@@ -2,9 +2,6 @@ package view;
 
 import controller.ControllerPersonnage;
 import java.awt.Graphics;
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import model.Terrain.ListeTerrain;
 import model.Thread.AbstractThread;
 import model.Titre;
@@ -22,12 +19,8 @@ public class PanelJeu extends AbstractVue {
     /**
     * Constructeur de la classe PanelJeu.
     * @param listeTerrain
-     * @throws javax.sound.sampled.UnsupportedAudioFileException
-     * @throws java.io.IOException
-     * @throws javax.sound.sampled.LineUnavailableException
     */
-    public PanelJeu(final ListeTerrain listeTerrain) throws UnsupportedAudioFileException, 
-            IOException, LineUnavailableException{
+    public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
         this.titre = new Titre();
         new ControllerPersonnage().controller(this);

@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JFrame;
+import model.AudioPlayer;
 import model.Terrain.ListeTerrain;
 
 /**
@@ -11,6 +12,7 @@ public final class Fenetre extends JFrame {
     
     private AbstractVue panel; 
     private static Fenetre fenetre; 
+    private AudioPlayer audio; 
     
     /**
     * Constructeur de la classe Fenetre.
@@ -18,6 +20,8 @@ public final class Fenetre extends JFrame {
     */
     private Fenetre() {
        this.setFocusable(false);
+       this.audio = new AudioPlayer(); 
+       this.audio.playMusic(); 
     }
     
     /**

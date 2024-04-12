@@ -10,68 +10,20 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 /**
- *
- * @author Félix
+ * Classe AudioPlayer.
+ * Gère le son.
  */
 public class AudioPlayer {
     
-    Clip clip;
-    AudioInputStream audioInputStream;
-    boolean audioPlaying;
-    
-    
-    /**
-    *
-    * constructeur de la classe.
-    * @param filePath chemin du fichier audio.
-    * @throws UnsupportedAudioFileException
-    * @throws IOException
-    * @throws LineUnavailableException
-    */
-    public AudioPlayer(final String filePath)
-        throws UnsupportedAudioFileException,
-        IOException, LineUnavailableException 
-    {
-        audioInputStream = 
-                AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
-          
-        clip = AudioSystem.getClip();
-          
-        clip.open(audioInputStream);
-        
-        audioPlaying = false;
-          
-
-    }
-    
-    public boolean isPlaying() {
-        return this.audioPlaying;
-    }
-    
-    /**
-    *
-    * pour jouer l'audio.
-    */
-    public void play() 
-    {
-        clip.start();
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        this.audioPlaying = true;
-    }
-    
-    /**
-    *
-    * pour stopper l'audio.
-    * @throws UnsupportedAudioFileException
-    * @throws IOException
-    * @throws LineUnavailableException
-    */
-    public void stop() throws UnsupportedAudioFileException,
-    IOException, LineUnavailableException 
-    {
-        clip.stop();
-        clip.close();
-        this.audioPlaying = false;
+   public void playMusic() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/musique/musique.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
+        }
     }
 }
 

@@ -14,10 +14,6 @@ import model.Thread.AbstractThread;
 import model.Thread.ActionPersonnage;
 import model.Thread.DefilementMaps;
 import java.awt.Font;
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import model.AudioPlayer;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -31,23 +27,15 @@ public abstract class AbstractVue extends JPanel implements Observer {
     private AbstractThread threadVehicule;
     private AbstractThread threadMaps;
     private AbstractThread threadActionPerso;
-    private final AudioPlayer audioPlayer;
     
     /**
     * Constructeur de la classe AbstractVue.
     * Initialise la taille du panel.
-    * @throws UnsupportedAudioFileException
-    * @throws IOException
-    * @throws LineUnavailableException
     */
-    public AbstractVue() throws UnsupportedAudioFileException, 
-            IOException, LineUnavailableException {
+    public AbstractVue() {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.personnage = Personnage.getPersonnage();
         this.personnage.setListHitbox(this.listeTerrain);
-        this.audioPlayer = 
-                new AudioPlayer("src/main/resources/musique/musique.wav");
-        
     }
 
     public ListeTerrain getListeTerrain() {
@@ -74,9 +62,6 @@ public abstract class AbstractVue extends JPanel implements Observer {
     }
     public AbstractThread getThreadMaps() {
         return this.threadMaps;
-    }
-    public AudioPlayer getAudioPlayer() {
-        return this.audioPlayer;
     }
 
     /**

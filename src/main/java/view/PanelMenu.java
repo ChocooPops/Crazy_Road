@@ -9,9 +9,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,14 +29,10 @@ public class PanelMenu extends AbstractVue {
     private DefilementVehicule timer;
 
     /**
-     * Constructeur de la classe PanelMenu.
-     * Initialise la liset des terrains.
-     * @throws javax.sound.sampled.UnsupportedAudioFileException
-     * @throws java.io.IOException
-     * @throws javax.sound.sampled.LineUnavailableException
-     */
-    public PanelMenu() throws UnsupportedAudioFileException, 
-            IOException, LineUnavailableException{
+    * Constructeur de la classe PanelMenu.
+    * Initialise la liset des terrains.
+    */
+    public PanelMenu() {
         this.titre = new Titre();
         this.setListeTerrain(new ListeTerrain());
         this.setLayout(new BorderLayout());
