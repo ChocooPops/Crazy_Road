@@ -15,12 +15,53 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class AudioPlayer {
     
-   public void playMusic() {
+    private Clip clipMusic; 
+    
+   /**
+    * Jouer le son du Menu.
+    */
+    public void playMusic() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/musique/musique.wav"));
+            AudioInputStream audioInputStream = AudioSystem.
+                    getAudioInputStream(new File("src/main/resources/musique/musique.wav"));
+            clipMusic = AudioSystem.getClip();
+            clipMusic.open(audioInputStream);
+            clipMusic.loop(Clip.LOOP_CONTINUOUSLY);
+            clipMusic.start();
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
+        }
+    }
+    
+    /**
+    * Arreter le son de la music principale.
+    */
+    public void stopMusic() {
+        this.clipMusic.stop(); 
+    }
+   
+   /**
+    * Jouer le son du deplacement du perso.
+    */
+   public void playDeplacement() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.
+                    getAudioInputStream(new File("src/main/resources/musique/deplacement.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
+        }
+    }
+ 
+    /**
+    * Jouer le son de la mort du perso.
+    */
+   public void playDeath() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.
+                    getAudioInputStream(new File("src/main/resources/musique/death.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
             clip.start();
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
         }

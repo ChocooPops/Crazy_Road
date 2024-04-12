@@ -1,6 +1,7 @@
 
 package model.Thread;
 
+import model.AudioPlayer;
 import model.Terrain.TerrainFactory;
 import view.AbstractVue;
 import view.Fenetre;
@@ -25,7 +26,10 @@ public class ActionPersonnage extends AbstractThread {
     @Override
     public void deroulement() {
         this.getPersonnage().actionBouton();
-        this.getPersonnage().checkCollisionVehicule();
+        if (this.getPersonnage().checkCollisionVehicule()) {
+            Fenetre.getFenetre().stopMusic();
+            new AudioPlayer().playDeath();
+        }
         this.getPersonnage().setGameOver();
         if (this.getPersonnage().horsEcran()) {
             this.setActivation(false);

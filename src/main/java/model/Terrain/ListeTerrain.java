@@ -22,7 +22,7 @@ public class ListeTerrain {
     }
     
     private void setListeTerrain() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 17; i++) {
             addTerrain(); 
         }
     }

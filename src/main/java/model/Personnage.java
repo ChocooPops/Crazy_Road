@@ -260,7 +260,8 @@ public final class Personnage {
     /**
     * Check si le personnage rencontre la collision d'un véhicule.
     */
-    public void checkCollisionVehicule() {
+    public boolean checkCollisionVehicule() {
+        boolean op = false; 
         if (!this.gameOver) {
             if (this.listeTerrain != null) {
                 for (Terrain terrain : this.listeTerrain.getListeTerrain()) {
@@ -268,13 +269,15 @@ public final class Personnage {
                         for (Vehicule vec : terrain.getListeVehicule()) {
                             if (vec.collision(this)) {
                                 this.image = this.imageMort; 
-                                this.gameOver = true;  
+                                this.gameOver = true;
+                                op = true; 
                             }
                         }  
                     }
                 }
             }
         }
+        return op; 
     }
 
     /**

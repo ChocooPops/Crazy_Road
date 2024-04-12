@@ -5,8 +5,7 @@ import model.AudioPlayer;
 import model.Terrain.ListeTerrain;
 
 /**
- *
- * @author ChocoPops
+ * Classe de la Fenetre.  
  */
 public final class Fenetre extends JFrame {
     
@@ -20,8 +19,7 @@ public final class Fenetre extends JFrame {
     */
     private Fenetre() {
        this.setFocusable(false);
-       this.audio = new AudioPlayer(); 
-       this.audio.playMusic(); 
+       this.audio = new AudioPlayer();
     }
     
     /**
@@ -47,6 +45,7 @@ public final class Fenetre extends JFrame {
             Fenetre.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             Fenetre.fenetre.setResizable(false);
             Fenetre.fenetre.setLocationRelativeTo(null);
+            Fenetre.fenetre.audio.playMusic();
         }
         return Fenetre.fenetre; 
     }
@@ -75,5 +74,13 @@ public final class Fenetre extends JFrame {
         Fenetre.fenetre.revalidate();
         Fenetre.fenetre.repaint();
         Fenetre.fenetre.panel.setFocusable(false);
+        this.audio.playMusic();
+    }
+    
+    /**
+    * Arreter la music principale.
+    */
+    public void stopMusic() {
+        this.audio.stopMusic();
     }
 }
