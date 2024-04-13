@@ -48,14 +48,16 @@ public class ControllerPause extends AbstractController {
     }
     
     private void actionPause(final Pause pause) {
-        if (pause.getEtat()) {
+        if (!this.getPerso().isGameOver()) {
+            if (pause.getEtat()) {
             Fenetre.getFenetre().resumeMusic();
             pause.setEtat(false);
             controlStart(); 
-        } else {
-            Fenetre.getFenetre().stopMusic();
-            pause.setEtat(true);
-            controlStop(); 
+            } else {
+                Fenetre.getFenetre().stopMusic();
+                pause.setEtat(true);
+                controlStop(); 
+            }
         }
     }
     
