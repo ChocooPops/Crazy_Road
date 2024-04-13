@@ -24,8 +24,7 @@ public final class Personnage {
     private ImageIcon imageMort; 
     private int x;
     private int y;
-    private int score = 0;
-    private int verifScore = 0;
+    private Score score; 
 
     private ListeTerrain listeTerrain; 
     private int avancementX; 
@@ -129,7 +128,7 @@ public final class Personnage {
         this.directionX = op; 
     }
     
-    public int getScore() {
+    public Score getScore() {
         return this.score;
     }
 
@@ -149,6 +148,7 @@ public final class Personnage {
             int hauteur = Personnage.personnage.image.getIconHeight();
             Personnage.personnage.longueur = Math.round(facteur * largeur);
             Personnage.personnage.hauteur = Math.round(facteur * hauteur);
+            Personnage.personnage.score = new Score(); 
         }
         return Personnage.personnage;
     }
@@ -190,11 +190,7 @@ public final class Personnage {
         if (this.checkCollisionArbre(3)) {
             if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
                 this.keyHaut = true; 
-
-                verifScore++;
-                if (verifScore > score) {
-                    score = verifScore;
-                }
+                this.score.incrementerScore();
             }
         }
     }
@@ -207,8 +203,7 @@ public final class Personnage {
             if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
                 < DimensionFacteur.getHauteurFenetre()) {
                 this.keyBas = true; 
-
-                verifScore--;
+                this.score.decrementerScore();
             }
         }
     }

@@ -16,6 +16,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
 import model.Pause;
+import model.Score;
 import model.ThreadRafraichissement;
 
 /**
@@ -135,9 +136,10 @@ public abstract class AbstractVue extends JPanel implements Observer {
       * @param g
      */
     public void dessinerScore(final Graphics g) {
+        Score score = this.personnage.getScore(); 
         g.setColor(Color.black);
-        g.setFont(new Font("impact", Font.BOLD, 20));
-        g.drawString("Score : " + this.personnage.getScore(), 10, 20);
+        g.setFont(new Font("impact", Font.BOLD, score.getTaille()));
+        g.drawString("Score : " + score.getScore(), score.getX(), score.getY());
     }
     
     /**
