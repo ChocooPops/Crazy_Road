@@ -24,10 +24,10 @@ public class AudioPlayer {
         try {
             AudioInputStream audioInputStream = AudioSystem.
                     getAudioInputStream(new File("src/main/resources/musique/musique.wav"));
-            clipMusic = AudioSystem.getClip();
-            clipMusic.open(audioInputStream);
-            clipMusic.loop(Clip.LOOP_CONTINUOUSLY);
-            clipMusic.start();
+            this.clipMusic = AudioSystem.getClip();
+            this.clipMusic.open(audioInputStream);
+            this.clipMusic.loop(Clip.LOOP_CONTINUOUSLY);
+            this.clipMusic.start();
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
         }
     }
@@ -38,7 +38,13 @@ public class AudioPlayer {
     public void stopMusic() {
         this.clipMusic.stop(); 
     }
-   
+    
+    /**
+    * Relancer la music.
+    */
+    public void resumeMusic() {
+        this.clipMusic.start();
+    }
    /**
    * Jouer le son du deplacement du perso.
    */

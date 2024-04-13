@@ -16,7 +16,6 @@ public abstract class Terrain {
     private int x; 
     private int y; 
     private String type; 
-    private int vitesse = DimensionFacteur.getVitesseMap();
     
     /**
     * Constructeur de la classe Terrain.
@@ -39,7 +38,7 @@ public abstract class Terrain {
         return this.y; 
     }
     public int getVitesse() {
-        return this.vitesse; 
+        return DimensionFacteur.getVitesseMap();
     }
     public ImageIcon getImage() {
         return this.image; 
@@ -84,7 +83,7 @@ public abstract class Terrain {
     * Fait descendre le terrain.
     */
     public void setDescenteTerrain() {
-        this.y += this.vitesse; 
+        this.y += this.getVitesse(); 
     }
     
     /**

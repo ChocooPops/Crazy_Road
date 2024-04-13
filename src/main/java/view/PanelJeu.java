@@ -38,9 +38,14 @@ public class PanelJeu extends AbstractVue {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         this.dessinerTerrain(g);
-        this.dessinerPersonnage(g);
+        if (!this.getPersonnage().isGameOver()) {
+            this.dessinerPersonnage(g);
+        }
         this.dessinerVehicule(g);
         this.dessinerScore(g);
         this.dessinerPause(g);
+        if (this.getPersonnage().isGameOver()) {
+            this.dessinerPersonnage(g);
+        }
     }
 }

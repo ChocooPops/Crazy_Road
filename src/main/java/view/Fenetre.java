@@ -83,4 +83,11 @@ public final class Fenetre extends JFrame {
     public void stopMusic() {
         this.audio.stopMusic();
     }
+    
+    /**
+    * Reprendre la music la où elle s'était arreter.
+    */
+    public void resumeMusic() {
+        this.audio.resumeMusic();
+    }
 }

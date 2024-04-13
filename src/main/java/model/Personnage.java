@@ -94,7 +94,7 @@ public final class Personnage {
     * Initialise la vitesse gravité.
     */
     public void setGravity() {
-        this.gravity = Math.round(5 * DimensionFacteur.getFacteur());
+        this.gravity = Math.round(6 * DimensionFacteur.getFacteur());
     }
     public ImageIcon getImage() {
         return this.image;
@@ -252,6 +252,19 @@ public final class Personnage {
     }
     
     /**
+    * Savoir si le perso depasse une certaine hauteur.
+     * @return 
+    */
+    public boolean getHauteurPerso() {
+        boolean op = false; 
+        int hauteurMax = DimensionFacteur.transformNbByFactor(10 * 20); 
+        if (this.y < hauteurMax) {
+            op = true; 
+        }
+        return op; 
+    }
+    
+    /**
     * Check si le personnage rencontre la collision d'un véhicule.
      * @return 
     */
@@ -302,13 +315,27 @@ public final class Personnage {
     }
     
     /**
+    * Vérifie lorsque le personnage est en dessous de l'écran apres un GameOver.
+     * @return 
+    */
+    public boolean horsEcranAfterGameOver() {
+        boolean op = false; 
+        int marge = Math.round(200 * DimensionFacteur.getFacteur()); 
+        if (this.y > DimensionFacteur.getHauteurFenetre() + marge) {
+            op = true; 
+        }
+        return op; 
+    }
+    
+    /**
     * Vérifie lorsque le personnage est en dessous de l'écran.
      * @return 
     */
     public boolean horsEcran() {
         boolean op = false; 
-        int marge = Math.round(200 * DimensionFacteur.getFacteur()); 
-        if (this.y > DimensionFacteur.getHauteurFenetre() + marge) {
+        if (this.y > DimensionFacteur.getHauteurFenetre()) {
+            this.image = this.imageMort; 
+            this.gameOver = true;
             op = true; 
         }
         return op; 

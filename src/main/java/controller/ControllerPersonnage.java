@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import model.AudioPlayer;
+import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.TerrainFactory;
 import view.AbstractVue;
@@ -78,21 +79,38 @@ public class ControllerPersonnage extends AbstractController {
     
     @Override
     public void controller() {
+        if (this.getPerso().getHauteurPerso()) {
+            DimensionFacteur.accelererVitesse();
+        } else {
+             DimensionFacteur.descelererVitesse();
+        }
         this.getPerso().actionBouton();
         if (this.getPerso().checkCollisionVehicule()) {
             Fenetre.getFenetre().stopMusic();
             new AudioPlayer().playDeath();
+            stopperThreadMaps(); 
         }
         this.getPerso().setGameOver();
-        if (this.getPerso().horsEcran()) {
-            this.stopThread();
-            this.stopperAllController(); 
-            this.getPerso().reinitilisation();
-            TerrainFactory.reinitialisationCount();
-            Fenetre.getFenetre().setEcranMenu();
+        if (this.getPerso().isGameOver()) {
+            if (this.getPerso().horsEcranAfterGameOver()) {
+                this.stopperAllController(); 
+                this.getPerso().reinitilisation();
+                TerrainFactory.reinitialisationCount();
+                Fenetre.getFenetre().setEcranMenu();
+            }
+        } else {
+            if (this.getPerso().horsEcran()) {
+                Fenetre.getFenetre().stopMusic();
+                new AudioPlayer().playDeath();
+                stopperThreadMaps(); 
+            }
         }
     }
     
+    private void stopperThreadMaps() {
+        this.getPanel().getControllerMaps().stopThread();
+        this.getPanel().getControllerMaps().interrutpionThread();
+    }
     private void stopperAllController() {
         this.getPanel().getControllerMaps().stopThread();
         this.getPanel().getControllerVec().stopThread();
