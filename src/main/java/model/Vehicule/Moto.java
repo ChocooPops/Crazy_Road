@@ -4,8 +4,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author p2203115
+ * Classe Moto.
  */
 public final class Moto extends Vehicule {
     

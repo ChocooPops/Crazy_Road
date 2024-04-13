@@ -25,12 +25,12 @@ public class ControllerPersonnage extends AbstractController {
     }
     
     @Override
-    public void controllerActionPerso() {
+    public void controllerKeyPanel() {
         Personnage perso = this.getPerso(); 
         this.getPanel().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent key) {
-                if (!perso.isGameOver()) {
+                if (!perso.isGameOver() && !getPanel().getPause().getEtat()) {
                     int code = key.getKeyCode(); 
                     if (code == KeyEvent.VK_RIGHT) {
                         perso.setDirectionX(true);
@@ -47,7 +47,7 @@ public class ControllerPersonnage extends AbstractController {
             
             @Override
             public void keyReleased(final KeyEvent key) {
-                if (!perso.isGameOver()) {
+                if (!perso.isGameOver() && !getPanel().getPause().getEtat()) {
                     switch (key.getKeyCode()) {
                         case KeyEvent.VK_RIGHT :
                             perso.keyRight();
@@ -77,7 +77,7 @@ public class ControllerPersonnage extends AbstractController {
     }
     
     @Override
-    protected void controller() {
+    public void controller() {
         this.getPerso().actionBouton();
         if (this.getPerso().checkCollisionVehicule()) {
             Fenetre.getFenetre().stopMusic();
@@ -86,9 +86,20 @@ public class ControllerPersonnage extends AbstractController {
         this.getPerso().setGameOver();
         if (this.getPerso().horsEcran()) {
             this.stopThread();
+            this.stopperAllController(); 
             this.getPerso().reinitilisation();
             TerrainFactory.reinitialisationCount();
             Fenetre.getFenetre().setEcranMenu();
         }
+    }
+    
+    private void stopperAllController() {
+        this.getPanel().getControllerMaps().stopThread();
+        this.getPanel().getControllerVec().stopThread();
+        this.getPanel().getControllerPerso().stopThread();
+        this.getPanel().getControllerMaps().interrutpionThread();
+        this.getPanel().getControllerVec().interrutpionThread();
+        this.getPanel().getControllerPerso().interrutpionThread();
+        this.getPanel().getThreadRafraichissement().stopRafraichissement();
     }
 }

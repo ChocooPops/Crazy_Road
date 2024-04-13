@@ -24,7 +24,6 @@ public final class Personnage {
     private ImageIcon imageMort; 
     private int x;
     private int y;
-    private int direction;
     private int score = 0;
     private int verifScore = 0;
 
@@ -42,8 +41,8 @@ public final class Personnage {
     private boolean gameOver; 
     
     /**
-     * Constructeur de la classe Personnage.
-     */
+    * Constructeur de la classe Personnage.
+    */
     public Personnage() {
         this.setGravity();
         this.jumpMort = true; 
@@ -103,7 +102,7 @@ public final class Personnage {
     }
     
     /**
-     * Met à jour la position du personnage pour l'animation de mort.
+    * Met à jour la position du personnage pour l'animation de mort.
     */
     public void setGameOver() {
         if (this.gameOver) {
@@ -135,9 +134,9 @@ public final class Personnage {
     }
 
     /**
-     * Recupérer le personnage s'il est déjà créer ou le creer.
+    * Recupérer le personnage s'il est déjà créer ou le creer.
      * @return 
-     */
+    */
     public static synchronized Personnage getPersonnage() {
         if (Personnage.personnage == null) {
             float facteur = DimensionFacteur.getFacteur();
@@ -162,8 +161,8 @@ public final class Personnage {
     }
 
     /**
-     * KeyRight => deplacement direction droite.
-     */
+    * KeyRight => deplacement direction droite.
+    */
     public void keyRight() {
         if (this.checkCollisionArbre(1)) {
             if (this.x + Math.round(18.4 * DimensionFacteur.getFacteur())
@@ -174,8 +173,8 @@ public final class Personnage {
     }
 
     /**
-     * KeyLeft => deplacement direction gauche.
-     */
+    * KeyLeft => deplacement direction gauche.
+    */
     public void keyLeft() {
         if (this.checkCollisionArbre(2)) {
             if (this.x - Math.round(18.4 * DimensionFacteur.getFacteur()) >= 0) {
@@ -185,8 +184,8 @@ public final class Personnage {
     }
 
     /**
-     * KeyUp => deplacement direction haut.
-     */
+    * KeyUp => deplacement direction haut.
+    */
     public void keyUp() {
         if (this.checkCollisionArbre(3)) {
             if (this.y - Math.round((242 / 12) * DimensionFacteur.getFacteur()) > 0) {
@@ -201,8 +200,8 @@ public final class Personnage {
     }
 
     /**
-     * KeyDown => deplacement direction bas.
-     */
+    * KeyDown => deplacement direction bas.
+    */
     public void keyDown() {
         if (this.checkCollisionArbre(4)) {
             if (this.y + Math.round((242 / 12) * DimensionFacteur.getFacteur())
@@ -215,8 +214,8 @@ public final class Personnage {
     }
     
     /**
-     * Dit au personnage s'il peut avancer ou non selon sa clé.
-     */
+    * Dit au personnage s'il peut avancer ou non selon sa clé.
+    */
     public void actionBouton() {
         if (keyDroite) {
             this.x += this.avancementX; 
@@ -259,6 +258,7 @@ public final class Personnage {
     
     /**
     * Check si le personnage rencontre la collision d'un véhicule.
+     * @return 
     */
     public boolean checkCollisionVehicule() {
         boolean op = false; 
@@ -281,15 +281,15 @@ public final class Personnage {
     }
 
     /**
-     * Fait descendre le personnage.
-     */
+    * Fait descendre le personnage.
+    */
     public void setDescente() {
         this.y += DimensionFacteur.getVitesseMap(); 
     }
     
     /**
-     * Changer l'image du perso pour une image avec un style pressé. 
-     */
+    * Changer l'image du perso pour une image avec un style pressé. 
+    */
     public void setImagePressed() {
         this.image = this.imagePressed; 
         if (this.directionX) {
@@ -297,8 +297,8 @@ public final class Personnage {
         }
     }
     /**
-     * Changer l'image du perso pour une image avec un style relaché. 
-     */
+    * Changer l'image du perso pour une image avec un style relaché. 
+    */
     public void setImageReleased() {
        this.image = this.imageReleased; 
        if (this.directionX) {

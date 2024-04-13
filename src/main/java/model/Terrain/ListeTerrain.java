@@ -67,8 +67,8 @@ public class ListeTerrain {
     }
     
     /**
-     * Fait descendre tous les éléments possibles.
-     */
+    * Fait descendre tous les éléments possibles.
+    */
     public void setDescenteAllElements() {
         for (Terrain terrain : this.getListeTerrain()) {
             terrain.setDescenteAllElementTerrain();

@@ -1,8 +1,8 @@
 package model;
 
 /**
- *
- * @author ChocoPops
+ * Classe DimensionFacteur.
+ * Definit statiquement tout les valeurs de dimension.
  */
 public final class DimensionFacteur {
     
@@ -29,5 +29,14 @@ public final class DimensionFacteur {
     
     public static int getVitesseMap() {
         return DimensionFacteur.vitesseMap; 
+    }
+    
+    /**
+    * Convertir directement un int selon le facteur.
+     * @param nb
+     * @return 
+    */
+    public static int transformNbByFactor(final int nb) {
+        return Math.round(DimensionFacteur.facteur * nb); 
     }
 }

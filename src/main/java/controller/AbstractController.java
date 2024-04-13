@@ -9,8 +9,9 @@ import view.AbstractVue;
  */
 public abstract class AbstractController {
 
-    private AudioPlayer audio; 
-    private boolean activation; 
+    private AudioPlayer audio;
+    private volatile boolean activation;
+    private volatile boolean interruption; 
     private AbstractVue panel; 
     private Personnage personnage; 
     private Thread thread; 
@@ -29,7 +30,7 @@ public abstract class AbstractController {
     /**
      * Fonction pour controller.
      */
-    protected abstract void controller();
+    public abstract void controller();
     
     public AudioPlayer getAudio() {
         return this.audio; 
@@ -57,13 +58,19 @@ public abstract class AbstractController {
         }
     }
     
-     /**
-    * Arrete le thread du controlleur.
+    /**
+    * Mettre en pause le thread du controlleur.
     */
     public void stopThread() {
         this.activation = false;
     }
     
+    /**
+    * Mettre fin au thread.
+    */
+    public void interrutpionThread() {
+        this.interruption = true;
+    }
     /**
     * Exécute le thread du controlleur.
     */
@@ -75,7 +82,7 @@ public abstract class AbstractController {
     * Méthode override dans la classe fille ControllerPersonnage.
     * Gère les clés du clavier.
     */
-    public void controllerActionPerso() { }
+    public void controllerKeyPanel() { }
     
     /**
     * Sous classe.
@@ -85,11 +92,21 @@ public abstract class AbstractController {
     public class ThreadController implements Runnable {
         @Override
         public void run() {
-            while (activation) {
-                try {
-                     Thread.sleep(30);
-                     controller(); 
+            while (!interruption) {
+                while (activation) {
+                    try {
+                        Thread.sleep(30);
+                        controller();  
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return; 
+                    }
+                }
+                 try {
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return; 
                 }
             }
         }

@@ -1,15 +1,14 @@
 package view;
 
 import java.awt.Graphics;
+import model.Pause;
 import model.Terrain.ListeTerrain;
-import model.Titre;
 
 /**
  * Classe PanelJeu.
  * Affiche toutes les informations nécessaires au jeu.
  */
 public class PanelJeu extends AbstractVue {
-    private Titre titre; 
   
     /**
     * Constructeur de la classe PanelJeu.
@@ -17,12 +16,13 @@ public class PanelJeu extends AbstractVue {
     */
     public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
-        this.titre = new Titre();
+        this.setPause(new Pause());
         this.getPersonnage().setListHitbox(this.getListeTerrain());
         this.getControllerPerso().startThread();
-        this.getControllerPerso().controllerActionPerso();
+        this.getControllerPerso().controllerKeyPanel();
         this.getControllerMaps().startThread();
         this.getControllerVec().startThread();
+        this.getControllerPause().controllerKeyPanel();
         this.getThreadRafraichissement().startRafraichissement();
     }
     
@@ -41,5 +41,6 @@ public class PanelJeu extends AbstractVue {
         this.dessinerPersonnage(g);
         this.dessinerVehicule(g);
         this.dessinerScore(g);
+        this.dessinerPause(g);
     }
 }

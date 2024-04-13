@@ -39,7 +39,7 @@ public class Champ extends Terrain {
     private String setImageChamp() {
         int nb = new Random().nextInt(6);
         this.typeTerrain = nb;
-        String src = ""; 
+        String src; 
         switch (nb) {
             case 0 :
                 src = "src/main/resources/terrain/terrain1.png";
@@ -116,8 +116,8 @@ public class Champ extends Terrain {
     }
 
     /**
-     * Fait descendre tous les éléments liés au terrain. 
-     */
+    * Fait descendre tous les éléments liés au terrain. 
+    */
     @Override
     public void setDescenteAllElementTerrain() {
         this.setDescenteTerrain();

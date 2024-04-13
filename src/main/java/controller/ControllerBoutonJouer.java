@@ -19,7 +19,9 @@ public class ControllerBoutonJouer extends AbstractController {
 
     @Override
     public void controller() {
+        this.getPanel().getThreadRafraichissement().stopRafraichissement();
         this.getPanel().getControllerVec().stopThread();
+        this.getPanel().getControllerVec().interrutpionThread();
         Fenetre.getFenetre().setEcranJeu(this.getPanel().getListeTerrain());
     }
 }

@@ -19,7 +19,7 @@ public class ControllerMaps extends AbstractController {
     }
 
     @Override
-    protected void controller() {
+    public void controller() {
         this.getPanel().getListeTerrain().setDescenteAllElements();
         this.getPerso().setDescente();
     }

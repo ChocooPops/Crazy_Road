@@ -82,8 +82,9 @@ public class PanelMenu extends AbstractVue {
     }
 
     /**
-     * Dessiner le titre du jeu.
-     */
+    * Dessiner le titre du jeu.
+     * @param g
+    */
     public void dessinerTitre(final Graphics g) {
         g.drawImage(this.titre.getImage().getImage(),
                 this.titre.getX(), this.titre.getY(),
@@ -91,25 +92,23 @@ public class PanelMenu extends AbstractVue {
     }
 
     /**
-     * Méthode pour faire avancer les voitures.
-     */
-
+    * Méthode pour faire avancer les voitures.
+    */
     @Override
     public void update() {
         repaint();
     }
 
     /**
-     *
-     * Sous classe du PanelMenu.
-     * Definit l'écouteur du bouton jouer.
-     */
+    * Sous classe du PanelMenu.
+    * Definit l'écouteur du bouton jouer.
+    */
     public class EcouteurJouer {
 
         /**
-         *
-         * Definit l'écouteur du bouton jouer.
-         */
+       * Definit l'écouteur du bouton jouer.
+         * @param panel
+       */
         public EcouteurJouer(final AbstractVue panel) {
             btJouer.addActionListener(new ActionListener() {
                 @Override

@@ -5,8 +5,7 @@ import javax.swing.ImageIcon;
 
 
 /**
- *
- * @author ChocoPops
+ * Classe Voiture.
  */
 public final class Voiture extends Vehicule {
     

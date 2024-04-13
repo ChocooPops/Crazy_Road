@@ -18,8 +18,8 @@ public class AudioPlayer {
     private Clip clipMusic; 
     
    /**
-    * Jouer le son du Menu.
-    */
+   * Jouer le son du Menu.
+   */
     public void playMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.
@@ -40,8 +40,8 @@ public class AudioPlayer {
     }
    
    /**
-    * Jouer le son du deplacement du perso.
-    */
+   * Jouer le son du deplacement du perso.
+   */
    public void playDeplacement() {
         try {
             AudioInputStream audioInputStream = AudioSystem.

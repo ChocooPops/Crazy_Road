@@ -125,9 +125,9 @@ public abstract class Vehicule {
     public abstract void setRandomImage(); 
     
     /**
-     * Fait descendre le véhicule.
-     * @param vitesse
-     */
+    * Fait descendre le véhicule.
+    * @param vitesse
+    */
     public void setDescenteVehicule(final int vitesse) {
         this.y += vitesse; 
     }

@@ -19,7 +19,7 @@ public class ControllerVehicule extends AbstractController {
     }
 
     @Override
-    protected void controller() {
+    public void controller() {
         for (Terrain terrain : this.getPanel().getListeTerrain().getListeTerrain()) {
             terrain.deplacerVoiture();
         }

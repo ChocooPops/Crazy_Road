@@ -2,6 +2,7 @@ package view;
 
 import controller.AbstractController;
 import controller.ControllerMaps;
+import controller.ControllerPause;
 import controller.ControllerPersonnage;
 import controller.ControllerVehicule;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
+import model.Pause;
 import model.ThreadRafraichissement;
 
 /**
@@ -25,11 +27,13 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     private ListeTerrain listeTerrain;
     private Personnage personnage;
+    private Pause pause; 
     
     private ThreadRafraichissement thread; 
     private AbstractController controllerPerso; 
     private AbstractController controllerMaps; 
     private AbstractController controllerVec; 
+    private AbstractController controllPause; 
     
     /**
     * Constructeur de la classe AbstractVue.
@@ -42,6 +46,7 @@ public abstract class AbstractVue extends JPanel implements Observer {
         this.controllerPerso = new ControllerPersonnage(this); 
         this.controllerMaps = new ControllerMaps(this); 
         this.controllerVec = new ControllerVehicule(this); 
+        this.controllPause = new ControllerPause(this); 
         this.thread = new ThreadRafraichissement(this); 
     }
 
@@ -56,7 +61,10 @@ public abstract class AbstractVue extends JPanel implements Observer {
     public void setPersonnage(final Personnage personnage) {
         this.personnage = personnage;
     }
-
+    public void setPause(final Pause newPause) {
+        this.pause = newPause; 
+    }
+    
     public Personnage getPersonnage() {
         return this.personnage;
     }
@@ -70,13 +78,19 @@ public abstract class AbstractVue extends JPanel implements Observer {
     public AbstractController getControllerVec() {
         return this.controllerVec; 
     }
+    public AbstractController getControllerPause() {
+        return this.controllPause; 
+    }
     public ThreadRafraichissement getThreadRafraichissement() {
         return this.thread; 
+    }
+    public Pause getPause() {
+        return this.pause; 
     }
     
     /**
     * Dessiner les terrains.
-    * @param g
+     * @param g
     */
     public void dessinerTerrain(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
@@ -118,11 +132,23 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     /**
      * Methode pour dessiner le score sur l'écran.
+      * @param g
      */
     public void dessinerScore(final Graphics g) {
         g.setColor(Color.black);
         g.setFont(new Font("impact", Font.BOLD, 20));
         g.drawString("Score : " + this.personnage.getScore(), 10, 20);
     }
+    
+    /**
+    * Methode pour dessiner la forme de la sur l'écran.
+     * @param g
+    */
+    public void dessinerPause(final Graphics g) {
+         g.drawImage(this.pause.getImage().getImage(),
+                this.pause.getX(), this.pause.getY(),
+                this.pause.getLongueur(), this.pause.getHauteur(), this);
+    }
+    
 }
 

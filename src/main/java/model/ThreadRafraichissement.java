@@ -28,7 +28,6 @@ public class ThreadRafraichissement extends Observable implements Runnable {
                     Thread.sleep(30);
                     this.notifyAllObservers();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
     }
