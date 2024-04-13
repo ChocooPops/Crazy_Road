@@ -16,7 +16,6 @@ public abstract class Terrain {
     private int x; 
     private int y; 
     private String type; 
-    private int vitesse = DimensionFacteur.getVitesseMap();
     
     /**
     * Constructeur de la classe Terrain.
@@ -39,7 +38,7 @@ public abstract class Terrain {
         return this.y; 
     }
     public int getVitesse() {
-        return this.vitesse; 
+        return DimensionFacteur.getVitesseMap();
     }
     public ImageIcon getImage() {
         return this.image; 
@@ -81,17 +80,16 @@ public abstract class Terrain {
     }
 
     /**
-     * Fait descendre le terrain.
-     */
+    * Fait descendre le terrain.
+    */
     public void setDescenteTerrain() {
-        this.y += this.vitesse; 
+        this.y += this.getVitesse(); 
     }
     
     /**
-     *
-     * Methode override par les classes filles.
+    * Methode override par les classes filles.
      * @param y
-     */
+    */
     public void addCollision(final int y) {
     };
 
@@ -111,13 +109,13 @@ public abstract class Terrain {
     }
 
     /**
-     * Methode override par les classes filles.Pour la liste des hitbox.
+    * Methode override par les classes filles.Pour la liste des hitbox.
      * @return 
-     */
+    */
     public abstract ArrayList<HitBox> getHitBoxes();
     
     /**
-     * Methode override par les classes filles.Pour la liste des hitbox.
-     */
+    * Methode override par les classes filles.Pour la liste des hitbox.
+    */
     public abstract void setDescenteAllElementTerrain(); 
 }

@@ -15,11 +15,11 @@ public class HitBox {
     private float facteur = DimensionFacteur.getFacteur();
 
     /**
-     * Constructeur de la hitbox.
-     * Instancie la taille et les coordonees de l'hitbox.
+    * Constructeur de la hitbox.
+    * Instancie la taille et les coordonees de l'hitbox.
      * @param x
      * @param y
-     */
+    */
     public HitBox(final int x, final int y) {
         this.x = x;
         this.y = y;
@@ -60,11 +60,11 @@ public class HitBox {
     }
 
     /**
-     * Check si le personnage rentrera en collision avec le perso.
+    * Check si le personnage rentrera en collision avec le perso.
      * @param personnage
      * @param direction
      * @return un boolean pour savoir si il y a une collision.
-     */
+    */
     public boolean collision(final Personnage personnage, final int direction) {
         int newX = 0; 
         int newY = 0; 
@@ -86,9 +86,9 @@ public class HitBox {
     }
     
     /**
-     * Fait descendre la hitbox.
+    * Fait descendre la hitbox.
      * @param vitesse
-     */
+    */
     public void setDescenteHitBox(final int vitesse) {
         this.y += vitesse; 
     }

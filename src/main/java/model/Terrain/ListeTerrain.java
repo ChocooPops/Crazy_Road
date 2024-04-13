@@ -22,7 +22,7 @@ public class ListeTerrain {
     }
     
     private void setListeTerrain() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 18; i++) {
             addTerrain(); 
         }
     }
@@ -67,8 +67,8 @@ public class ListeTerrain {
     }
     
     /**
-     * Fait descendre tous les éléments possibles.
-     */
+    * Fait descendre tous les éléments possibles.
+    */
     public void setDescenteAllElements() {
         for (Terrain terrain : this.getListeTerrain()) {
             terrain.setDescenteAllElementTerrain();

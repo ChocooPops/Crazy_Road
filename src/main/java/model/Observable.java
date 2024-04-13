@@ -20,10 +20,10 @@ public abstract class Observable {
     }
     
     /**
- *
- * Ajouter un observer à la liste.
- * @param observer l'observer à ajouter.
- */
+    *
+    * Ajouter un observer à la liste.
+     * @param observer l'observer à ajouter.
+    */
     public void addObserver(final Observer observer) {
         this.observers.add(observer); 
     }

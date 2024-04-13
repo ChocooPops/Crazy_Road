@@ -7,7 +7,6 @@ package model.Vehicule;
 public class VehiculeFactory {
     
     /**
-    *
     * Constructeur de la classe.
     */
     public VehiculeFactory() {

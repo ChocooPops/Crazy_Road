@@ -1,20 +1,14 @@
 package view;
 
-import controller.ControllerPersonnage;
 import java.awt.Graphics;
+import model.Pause;
 import model.Terrain.ListeTerrain;
-import model.Thread.AbstractThread;
-import model.Titre;
 
 /**
  * Classe PanelJeu.
  * Affiche toutes les informations nécessaires au jeu.
  */
 public class PanelJeu extends AbstractVue {
-    private Titre titre; 
-    private AbstractThread threadDefilementMaps; 
-    private AbstractThread threadDefilementVec; 
-    private AbstractThread threadActionPerso; 
   
     /**
     * Constructeur de la classe PanelJeu.
@@ -22,12 +16,14 @@ public class PanelJeu extends AbstractVue {
     */
     public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
-        this.titre = new Titre();
-        new ControllerPersonnage().controller(this);
+        this.setPause(new Pause());
         this.getPersonnage().setListHitbox(this.getListeTerrain());
-        this.setThreadVehicule();
-        this.setThreadMaps();
-        this.setThreadActionPerso();
+        this.getControllerPerso().startThread();
+        this.getControllerPerso().controllerKeyPanel();
+        this.getControllerMaps().startThread();
+        this.getControllerVec().startThread();
+        this.getControllerPause().controllerKeyPanel();
+        this.getThreadRafraichissement().startRafraichissement();
     }
     
     @Override
@@ -42,8 +38,14 @@ public class PanelJeu extends AbstractVue {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         this.dessinerTerrain(g);
-        this.dessinerPersonnage(g);
+        if (!this.getPersonnage().isGameOver()) {
+            this.dessinerPersonnage(g);
+        }
         this.dessinerVehicule(g);
         this.dessinerScore(g);
+        this.dessinerPause(g);
+        if (this.getPersonnage().isGameOver()) {
+            this.dessinerPersonnage(g);
+        }
     }
 }

@@ -1,19 +1,23 @@
 package view;
 
+import controller.AbstractController;
+import controller.ControllerMaps;
+import controller.ControllerPause;
+import controller.ControllerPersonnage;
+import controller.ControllerVehicule;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Personnage;
 import model.Terrain.ListeTerrain;
 import model.Terrain.Terrain;
-import model.Thread.DefilementVehicule;
 import model.Vehicule.Vehicule;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
-import model.Thread.AbstractThread;
-import model.Thread.ActionPersonnage;
-import model.Thread.DefilementMaps;
 import java.awt.Font;
+import model.Pause;
+import model.Score;
+import model.ThreadRafraichissement;
 
 /**
  * Classe abstraite pour controler les différentes vues.
@@ -24,9 +28,13 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     private ListeTerrain listeTerrain;
     private Personnage personnage;
-    private AbstractThread threadVehicule;
-    private AbstractThread threadMaps;
-    private AbstractThread threadActionPerso;
+    private Pause pause; 
+    
+    private ThreadRafraichissement thread; 
+    private AbstractController controllerPerso; 
+    private AbstractController controllerMaps; 
+    private AbstractController controllerVec; 
+    private AbstractController controllPause; 
     
     /**
     * Constructeur de la classe AbstractVue.
@@ -36,6 +44,11 @@ public abstract class AbstractVue extends JPanel implements Observer {
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.personnage = Personnage.getPersonnage();
         this.personnage.setListHitbox(this.listeTerrain);
+        this.controllerPerso = new ControllerPersonnage(this); 
+        this.controllerMaps = new ControllerMaps(this); 
+        this.controllerVec = new ControllerVehicule(this); 
+        this.controllPause = new ControllerPause(this); 
+        this.thread = new ThreadRafraichissement(this); 
     }
 
     public ListeTerrain getListeTerrain() {
@@ -49,43 +62,36 @@ public abstract class AbstractVue extends JPanel implements Observer {
     public void setPersonnage(final Personnage personnage) {
         this.personnage = personnage;
     }
-
+    public void setPause(final Pause newPause) {
+        this.pause = newPause; 
+    }
+    
     public Personnage getPersonnage() {
         return this.personnage;
     }
-
-    public AbstractThread getThreadVehicule() {
-        return this.threadVehicule;
+ 
+    public AbstractController getControllerPerso() {
+        return this.controllerPerso; 
     }
-    public AbstractThread getThreadActionPerso() {
-        return this.threadActionPerso;
+    public AbstractController getControllerMaps() {
+        return this.controllerMaps; 
     }
-    public AbstractThread getThreadMaps() {
-        return this.threadMaps;
+    public AbstractController getControllerVec() {
+        return this.controllerVec; 
     }
-
-    /**
-    * Instancier le thread responsable du defilement des véhicules.
-    */
-    public void setThreadVehicule() {
-        this.threadVehicule = new DefilementVehicule(this); 
+    public AbstractController getControllerPause() {
+        return this.controllPause; 
     }
-    /**
-    * Instancier le thread responsable des actions du personnages.
-    */
-    public void setThreadActionPerso() {
-        this.threadActionPerso = new ActionPersonnage(this, this.getThreadMaps()); 
+    public ThreadRafraichissement getThreadRafraichissement() {
+        return this.thread; 
     }
-    /**
-    * Instancier le thread responsable du defilement de la Map.
-    */
-    public void setThreadMaps() {
-        this.threadMaps = new DefilementMaps(this); 
+    public Pause getPause() {
+        return this.pause; 
     }
     
     /**
     * Dessiner les terrains.
-    * @param g
+     * @param g
     */
     public void dessinerTerrain(final Graphics g) {
         for (int i = 0; i < this.getListeTerrain().getListeSize(); i++) {
@@ -127,11 +133,24 @@ public abstract class AbstractVue extends JPanel implements Observer {
 
     /**
      * Methode pour dessiner le score sur l'écran.
+      * @param g
      */
     public void dessinerScore(final Graphics g) {
+        Score score = this.personnage.getScore(); 
         g.setColor(Color.black);
-        g.setFont(new Font("impact", Font.BOLD, 20));
-        g.drawString("Score : " + this.personnage.getScore(), 10, 20);
+        g.setFont(new Font("impact", Font.BOLD, score.getTaille()));
+        g.drawString("Score : " + score.getScore(), score.getX(), score.getY());
     }
+    
+    /**
+    * Methode pour dessiner la forme de la sur l'écran.
+     * @param g
+    */
+    public void dessinerPause(final Graphics g) {
+         g.drawImage(this.pause.getImage().getImage(),
+                this.pause.getX(), this.pause.getY(),
+                this.pause.getLongueur(), this.pause.getHauteur(), this);
+    }
+    
 }
 

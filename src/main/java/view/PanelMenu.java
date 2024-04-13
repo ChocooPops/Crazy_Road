@@ -15,30 +15,29 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.Thread.DefilementVehicule;
 import model.Titre;
 
 /**
- *
  * @author ChocoPops
  */
 public class PanelMenu extends AbstractVue {
 
     private JButton btJouer;
     private Titre titre;
-    private DefilementVehicule timer;
 
     /**
-     * Constructeur de la classe PanelMenu.
-     * Initialise la liset des terrains.
-     */
+    * Constructeur de la classe PanelMenu.
+    * Initialise la liset des terrains.
+    */
     public PanelMenu() {
         this.titre = new Titre();
         this.setListeTerrain(new ListeTerrain());
         this.setLayout(new BorderLayout());
         this.setPanelBouton();
-        this.setThreadVehicule();
         new EcouteurJouer(this);
+        this.getControllerVec().startThread();
+        this.getThreadRafraichissement().startRafraichissement();
+        
     }
 
     private void setPanelBouton() {
@@ -83,8 +82,9 @@ public class PanelMenu extends AbstractVue {
     }
 
     /**
-     * Dessiner le titre du jeu.
-     */
+    * Dessiner le titre du jeu.
+     * @param g
+    */
     public void dessinerTitre(final Graphics g) {
         g.drawImage(this.titre.getImage().getImage(),
                 this.titre.getX(), this.titre.getY(),
@@ -92,30 +92,28 @@ public class PanelMenu extends AbstractVue {
     }
 
     /**
-     * Méthode pour faire avancer les voitures.
-     */
-
+    * Méthode pour faire avancer les voitures.
+    */
     @Override
     public void update() {
         repaint();
     }
 
     /**
-     *
-     * Sous classe du PanelMenu.
-     * Definit l'écouteur du bouton jouer.
-     */
+    * Sous classe du PanelMenu.
+    * Definit l'écouteur du bouton jouer.
+    */
     public class EcouteurJouer {
 
         /**
-         *
-         * Definit l'écouteur du bouton jouer.
-         */
+       * Definit l'écouteur du bouton jouer.
+         * @param panel
+       */
         public EcouteurJouer(final AbstractVue panel) {
             btJouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    new ControllerBoutonJouer().controller(panel);
+                    new ControllerBoutonJouer(panel).controller();
                 }
             });
         }

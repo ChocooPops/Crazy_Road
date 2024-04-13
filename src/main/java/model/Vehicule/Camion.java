@@ -51,12 +51,11 @@ public final class Camion extends Vehicule {
     
     
     /**
-     *
-     * Outrepasse la éthode collision de la classe véhicule.
-     * Crée un collision particulière pour le Camion.
+    * Outrepasse la éthode collision de la classe véhicule.
+    * Crée un collision particulière pour le Camion.
      * @param personnage
      * @return 
-     */
+    */
     @Override
     public boolean collision(final Personnage personnage) {
         int newX = Math.round(5 * DimensionFacteur.getFacteur()); 
