@@ -2,8 +2,11 @@ package controller;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import model.AudioPlayer;
 import model.Personnage;
+import model.Terrain.TerrainFactory;
 import view.AbstractVue;
+import view.Fenetre;
 
 /**
  *
@@ -12,12 +15,19 @@ import view.AbstractVue;
 public class ControllerPersonnage extends AbstractController {
 
     /**
+    * Constructeur de la classe ControllerPersonnage.
+    * Gère le déplacement et les interactions du personanage.
      * @param panel
-     */
+    */
+    public ControllerPersonnage(final AbstractVue panel) {
+        super(panel); 
+        this.setThread();
+    }
+    
     @Override
-    public void controller(final AbstractVue panel) {
-        Personnage perso = Personnage.getPersonnage();
-        panel.addKeyListener(new KeyAdapter() {
+    public void controllerActionPerso() {
+        Personnage perso = this.getPerso(); 
+        this.getPanel().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent key) {
                 if (!perso.isGameOver()) {
@@ -64,5 +74,21 @@ public class ControllerPersonnage extends AbstractController {
                 }
             }
         });
+    }
+    
+    @Override
+    protected void controller() {
+        this.getPerso().actionBouton();
+        if (this.getPerso().checkCollisionVehicule()) {
+            Fenetre.getFenetre().stopMusic();
+            new AudioPlayer().playDeath();
+        }
+        this.getPerso().setGameOver();
+        if (this.getPerso().horsEcran()) {
+            this.stopThread();
+            this.getPerso().reinitilisation();
+            TerrainFactory.reinitialisationCount();
+            Fenetre.getFenetre().setEcranMenu();
+        }
     }
 }

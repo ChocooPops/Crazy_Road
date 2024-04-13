@@ -8,11 +8,18 @@ import view.Fenetre;
  */
 public class ControllerBoutonJouer extends AbstractController {
 
-    @Override
-    public void controller(final AbstractVue panel) {
-        
-        panel.getThreadVehicule().setActivation(false);
-        Fenetre.getFenetre().setEcranJeu(panel.getListeTerrain());
+    /**
+    * Constructeur de la classe ControllerBoutonJouer.
+    * Gère le bouton Jouer du panel.
+     * @param panel
+    */
+    public ControllerBoutonJouer(final AbstractVue panel) {
+        super(panel);
     }
-    
+
+    @Override
+    public void controller() {
+        this.getPanel().getControllerVec().stopThread();
+        Fenetre.getFenetre().setEcranJeu(this.getPanel().getListeTerrain());
+    }
 }

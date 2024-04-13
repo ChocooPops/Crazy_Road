@@ -1,9 +1,7 @@
 package view;
 
-import controller.ControllerPersonnage;
 import java.awt.Graphics;
 import model.Terrain.ListeTerrain;
-import model.Thread.AbstractThread;
 import model.Titre;
 
 /**
@@ -12,9 +10,6 @@ import model.Titre;
  */
 public class PanelJeu extends AbstractVue {
     private Titre titre; 
-    private AbstractThread threadDefilementMaps; 
-    private AbstractThread threadDefilementVec; 
-    private AbstractThread threadActionPerso; 
   
     /**
     * Constructeur de la classe PanelJeu.
@@ -23,11 +18,12 @@ public class PanelJeu extends AbstractVue {
     public PanelJeu(final ListeTerrain listeTerrain) {
         this.setListeTerrain(listeTerrain);
         this.titre = new Titre();
-        new ControllerPersonnage().controller(this);
         this.getPersonnage().setListHitbox(this.getListeTerrain());
-        this.setThreadVehicule();
-        this.setThreadMaps();
-        this.setThreadActionPerso();
+        this.getControllerPerso().startThread();
+        this.getControllerPerso().controllerActionPerso();
+        this.getControllerMaps().startThread();
+        this.getControllerVec().startThread();
+        this.getThreadRafraichissement().startRafraichissement();
     }
     
     @Override

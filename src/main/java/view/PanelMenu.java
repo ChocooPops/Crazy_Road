@@ -15,18 +15,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.DimensionFacteur;
 import model.Terrain.ListeTerrain;
-import model.Thread.DefilementVehicule;
 import model.Titre;
 
 /**
- *
  * @author ChocoPops
  */
 public class PanelMenu extends AbstractVue {
 
     private JButton btJouer;
     private Titre titre;
-    private DefilementVehicule timer;
 
     /**
     * Constructeur de la classe PanelMenu.
@@ -37,8 +34,10 @@ public class PanelMenu extends AbstractVue {
         this.setListeTerrain(new ListeTerrain());
         this.setLayout(new BorderLayout());
         this.setPanelBouton();
-        this.setThreadVehicule();
         new EcouteurJouer(this);
+        this.getControllerVec().startThread();
+        this.getThreadRafraichissement().startRafraichissement();
+        
     }
 
     private void setPanelBouton() {
@@ -115,7 +114,7 @@ public class PanelMenu extends AbstractVue {
             btJouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    new ControllerBoutonJouer().controller(panel);
+                    new ControllerBoutonJouer(panel).controller();
                 }
             });
         }
