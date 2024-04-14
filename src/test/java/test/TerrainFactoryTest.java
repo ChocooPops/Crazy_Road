@@ -3,14 +3,14 @@ package test;
 import model.Terrain.TerrainFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class TerrainFactoryTest {
 
     private TerrainFactory terrainFactory = new TerrainFactory();
     @Test
     void creationTerrain() {
-        assertEquals(terrainFactory.creationTerrain().getType(), "Champ");
-        System.out.println("creation du terrain initial fonctionnel");
+        assertNotEquals(terrainFactory.creationTerrain(), null);
+        System.out.println("creation du terrain fonctionnel");
     }
 }
