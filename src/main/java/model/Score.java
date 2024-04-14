@@ -9,9 +9,12 @@ public class Score {
     private int y; 
     private int taille; 
     private int score; 
-    private int verifScore; 
-    
-    Score() {
+    private int verifScore;
+
+    /**
+     * Constructeur de la classe score.
+     */
+    public Score() {
         this.x = DimensionFacteur.transformNbByFactor(7); 
         this.y = DimensionFacteur.transformNbByFactor(12); 
         this.taille = DimensionFacteur.transformNbByFactor(11); 
